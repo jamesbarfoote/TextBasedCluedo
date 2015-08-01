@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Random;
 
 public class Board {
@@ -93,15 +94,43 @@ public class Board {
 	}
 
 	/**
-	 * Create the players and delegates cards to their hand
+	 * Creates the players and delegates cards to their hand
 	 * @param numPlayers
 	 * @return
 	 */
-	private void genPlayers(int numPlayers) {
+	private void genPlayers(int numPlayers) {	//Need to add starting locations for the players.
+		Random rand = new Random();
+		int characterNum = rand.nextInt(characters.size());
+		int count = 0;
+		while(count < numPlayers){
+			if(characterNames.get(characterNum) == "Miss Scarlett"){
+				players.add(new Player("Miss Scarlett", null, count));
+			}
+			if(characterNames.get(characterNum) == "Colonel Mustard"){
+				players.add(new Player("Colonel Mustard", null, count));
+			}
+			if(characterNames.get(characterNum) == "Mrs. White"){
+				players.add(new Player("Mrs. White", null, count));
+			}
+			if(characterNames.get(characterNum) == "The Reverend Green"){
+				players.add(new Player("The Reverend Green", null, count));
+			}
+			if(characterNames.get(characterNum) == "Mrs. Peacock"){
+				players.add(new Player("Mrs. Peacock", null, count));
+			}
+			if(characterNames.get(characterNum) == "Professor Plum"){
+				players.add(new Player("Professor Plum", null, count));
+			}
+		}
+		Collections.shuffle(allCards);
+		int index = 0;
+		for(Player player : players){
+			player.addToHand(allCards.get(index));
+			allCards.remove(index);
+		}
 	}
 
-	public ArrayList<Player> getPlayers()
-	{
+	public ArrayList<Player> getPlayers(){
 		return players;
 	}
 }
