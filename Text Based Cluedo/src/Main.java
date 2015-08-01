@@ -8,26 +8,28 @@ public class Main {
 	
 	public static void playGame(Scanner scan)
 	{
+		System.out.println("Welcome to cluedo!");
 		int h = 25;
 		int w = 25;
 		int numP = 0;
-		Boolean finished = false;
+		boolean finished = false;
 		//ask for how many players are playing
-		
+		System.out.println("How many players are there?");
 		numP = scan.nextInt();
-		
+		System.out.println(numP);
 		Board b = new Board(h, w, numP);
 		ArrayList<Player> players = b.getPlayers();
-		
+		System.out.println("Got players");
 		while(!finished)
 		{
-			
+			//System.out.println("There are " + players.size() + " players");
 		//for each player
 			for(Player p: players)
 			{
 				Room r = null;
 				//calculate distances	
 				p.calculateDistances();
+				System.out.println("Calculated distances");
 				Map<Room, Integer> rDist = p.getRoomDist();
 				int i = 0;
 				//look at room distances map and print out each entry
