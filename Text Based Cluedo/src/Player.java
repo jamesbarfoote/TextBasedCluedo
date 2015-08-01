@@ -5,17 +5,17 @@ import java.util.Random;
 
 public class Player {
 	private ArrayList<Card> hand = new ArrayList<Card>();
-	private Location location;
 	private int roll;
 	private Map<Room, Integer> roomDistances = new HashMap<Room, Integer>();
+	private String name;
+	private Location location;
 	private int playerNum;
 
-	public Player (Location location, int playerNum){
+	public Player (String name, Location location, int playerNum){
+		this.name = name;
 		this.location = location;
 		this.playerNum = playerNum;	
 	}
-
-
 
 	public int rollDice(){
 		Random rand = new Random();
