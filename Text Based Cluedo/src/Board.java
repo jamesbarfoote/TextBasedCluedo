@@ -121,16 +121,42 @@ public class Board {
 			if(characterNames.get(characterNum) == "Professor Plum"){
 				players.add(new Player("Professor Plum", null, count));
 			}
+			count++;
 		}
 		Collections.shuffle(allCards);
 		int index = 0;
 		for(Player player : players){
 			player.addToHand(allCards.get(index));
 			allCards.remove(index);
+			index++;
 		}
 	}
 
 	public ArrayList<Player> getPlayers(){
 		return players;
+	}
+	
+	public ArrayList<String> getWeaponNames(){
+		return weaponNames;
+	}
+	
+	public ArrayList<String> getCharacterNames(){
+		return characterNames;
+	}
+	
+	public ArrayList<String> getRoomNames(){
+		return roomNames;
+	}
+	
+	public ArrayList<Room> getRooms(){
+		return rooms;
+	}
+	
+	public ArrayList<Weapon> getWeapons(){
+		return weapons;
+	}
+	
+	public ArrayList<Character> getCharacters(){
+		return characters;
 	}
 }
