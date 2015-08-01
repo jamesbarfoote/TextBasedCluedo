@@ -1,7 +1,5 @@
 
 public class Room extends Card{
-
-	private String[] rooms = {"Kitchen", "Ballroom", "Conservatory", "Billiard Room", "Library", "Study", "Hall", "Lounge", "Dining Room"};
 	private String name;
 	private Location location;
 	//For evey elem in array
