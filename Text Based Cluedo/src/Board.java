@@ -6,7 +6,7 @@ public class Board {
 	public static ArrayList<Player> players;
 	private int width, height;
 	
-	public Board(ArrayList<Card> answer, ArrayList<Player> players, int width, int height) {
+	public Board(int width, int height) {
 		this.answer = answer;
 		this.players = players;
 		this.width = width;
