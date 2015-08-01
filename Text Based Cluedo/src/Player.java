@@ -4,15 +4,14 @@ import java.util.Map;
 import java.util.Random;
 
 public class Player {
-	private ArrayList<Card> cards = new ArrayList<Card>();
+	private ArrayList<Card> hand = new ArrayList<Card>();
 	private Location location;
 	private int roll;
 	private Room room;
 	private Map<Room, Integer> roomDistances = new HashMap<Room, Integer>();
 	private int playerNum;
 
-	public Player (ArrayList<Card> hand, Location location, int playerNum){
-		this.cards = hand;
+	public Player (Location location, int playerNum){
 		this.location = location;
 		this.playerNum = playerNum;
 	}
@@ -22,6 +21,10 @@ public class Player {
 		Random rand = new Random();
 		roll = rand.nextInt(6);
 		System.out.println(roll);
+	}
+	
+	public void addToHand(Card c){
+		hand.add(c);
 	}
 
 	/**
@@ -84,11 +87,7 @@ public class Player {
 	}
 
 	public ArrayList<Card> getCards(){
-		return cards;
-	}
-	
-	public void setCards(ArrayList<Card> c){
-		cards = c;
+		return hand;
 	}
 
 	public int getRoll(){

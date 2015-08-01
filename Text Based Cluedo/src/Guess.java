@@ -53,9 +53,7 @@ public class Guess {
 		}
 		if (discoveredCard != null) {
 			for (Player p : players) {
-				ArrayList<Card> cards = p.getCards();
-				cards.add(discoveredCard);
-				p.setCards(cards);
+				p.addToHand(discoveredCard);
 			}
 		} else {
 			System.out.println("No player had any of the suggested cards");
@@ -69,9 +67,15 @@ public class Guess {
 	 */
 	private void Accusation(List<Card> guess) {
 		for (Card card : guess) {
-			if(Board.answer.contains(card){
-				
+			if(!Board.answer.contains(card)){
+				for(Player p : Board.players){
+					for(int i = 0; i < player.getCards().size(); i++){
+						p.addToHand(player.getCards().get(i));
+					}
+				}
+				Board.players.remove(player);
 			}
 		}
+		//player wins
 	}
 }
