@@ -49,17 +49,44 @@ public class Main {
 				System.out.println("Where do you want to move to?");
 				int numChoice = scan.nextInt();
 				
-				//update locatio
+				//update location
 				r = rooms.get(numChoice);
 				p.updateLocation(r);
 				
 				//make a guess option (suggestion, accusation OR nothing)
-				//if(input == 1 || 2){ 1 = suggestion 2 = accusation, 3 = nothing
+				System.out.println("What would you like to do?");
+				System.out.println("1 - Suggestion");
+				System.out.println("2 - Accusation");
+				System.out.println("3 - Nothing");
+				int option = scan.nextInt();
+			    if(option == 1 || option == 2)
+			    { 
+			    	
+			    	System.out.println("Please type the 3 cards that you are guessing on a new line");
+			    	System.out.println("In this order: Room, Weapon, Character");
+			    	//get cards from typed input on new line
+			    	Room g = new Room(scan.next(), null);
+			    	Weapon gw = new Weapon(scan.next());
+			    	Character gc = new Character(scan.next());
+			    	ArrayList<Card> guessHand = new ArrayList<Card>();
+			    	guessHand.add(gw);
+			    	guessHand.add(g);
+			    	guessHand.add(gc);
+			    	
+			    	//create a guess hand
+			    	boolean opt = false;
+			    	if(option == 1)
+			    	{
+			    		opt = true;
+			    	}
+			    	
+					Guess n = new Guess(opt, guessHand, p);
+					if (n.hasWon()) { finished = true;}
+			    	
+			    }
 					
-					//get cards from typed input on new line
-					//create a guess hand
-					//Guess n = new Guess(suggestion OR accusation bool, cards to guess, player);
-					//if guess.Won == true { finished = true}
+					
+					
 				//end turn 
 			}
 		}

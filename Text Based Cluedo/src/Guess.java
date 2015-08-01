@@ -4,7 +4,7 @@ import java.util.List;
 public class Guess {
 
 	private Player player;
-	private boolean Won = false;
+	private boolean won = false;
 
 	public Guess(boolean suggestion, List<Card> guess, Player player) {
 		this.player = player;
@@ -80,6 +80,11 @@ public class Guess {
 				Board.players.remove(player);
 			}
 		}
-		this.Won = true;
+		this.won = true;
+	}
+	
+	public boolean hasWon()
+	{
+		return won;
 	}
 }
