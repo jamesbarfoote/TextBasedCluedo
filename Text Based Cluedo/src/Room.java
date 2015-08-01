@@ -4,9 +4,12 @@ public class Room extends Card{
 	private String[] rooms = {"Kitchen", "Ballroom", "Conservatory", "Billiard Room", "Library", "Study", "Hall", "Lounge", "Dining Room"};
 	private String name;
 	private Location location;
+	//For evey elem in array
+	//if count = 0 then loc = 4,4
+	
 	//private int width, height;
 	
-	public Room(String name, Location location, int width, int height){
+	public Room(String name, Location location){
 		this.name = name;
 		this.location = location;
 		//this.width = width;
