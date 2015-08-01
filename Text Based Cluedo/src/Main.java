@@ -1,32 +1,51 @@
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Random;
+import java.util.Scanner;
 
 public class Main {
 	
-	public static void playGame()
+	public static void playGame(Scanner scan)
 	{
 		int h = 25;
 		int w = 25;
 		int numP = 0;
 		Boolean finished = false;
-				
+		//ask for how many players are playing
+		
+		numP = scan.nextInt();
+		
 		Board b = new Board(h, w, numP);
 		ArrayList<Player> players = b.getPlayers();
 		
 		while(!finished)
 		{
+			
 		//for each player
 			for(Player p: players)
 			{
 				Room r = null;
 				//calculate distances	
 				p.calculateDistances();
-				//display distances
-					//look at room distances map and print out each entry
+				Map<Room, Integer> rDist = p.getRoomDist();
+				int i = 0;
+				//look at room distances map and print out each entry
+				for(Entry<Room, Integer> e: rDist.entrySet())
+				{
+					Room cr = e.getKey();
+					int dist = e.getValue();
+					System.out.println(i + " " + cr + " " + dist);
+					i++;
+				}
 					
 				//roll dice
-				p.rollDice();
+				int diceNum = p.rollDice();
+				System.out.println("You rolled a " + diceNum);
+				
 				//give option for movement (dont have to)
+				System.out.println("Where do you want to move to?");
+				
 				//update location
 				//r = index chosen
 				p.updateLocation(r);
@@ -46,7 +65,8 @@ public class Main {
 		
 	public static void main(String [ ] args)
 	{
-		playGame();
+		Scanner scan = new Scanner(System.in);
+		playGame(scan);
 	}
 
 }
