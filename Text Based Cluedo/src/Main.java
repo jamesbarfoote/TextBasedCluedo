@@ -16,13 +16,14 @@ public class Main {
 		//ask for how many players are playing
 		System.out.println("How many players are there?");
 		numP = scan.nextInt();
-		System.out.println(numP);
+		
 		Board b = new Board(h, w, numP);
+		
 		ArrayList<Player> players = b.getPlayers();
 		System.out.println("Got players");
-		while(!finished)
+		while(finished == false)
 		{
-			//System.out.println("There are " + players.size() + " players");
+			System.out.println("There are " + players.size() + " players");
 		//for each player
 			for(Player p: players)
 			{
@@ -34,6 +35,7 @@ public class Main {
 				int i = 0;
 				//look at room distances map and print out each entry
 				ArrayList<Room> rooms = new ArrayList<Room>();
+				System.out.println("rDist size = " + rDist.size());
 				for(Entry<Room, Integer> e: rDist.entrySet())
 				{
 					Room cr = e.getKey();
