@@ -7,18 +7,12 @@ public class Main {
 	{
 		int h = 25;
 		int w = 25;
-		ArrayList<Player> players = new ArrayList<Player>();
-		ArrayList<Card> answer = new ArrayList<Card>();
-		
-		
-		Board b = new Board(answer, players, h, w);
+		int numP = 0;
+				
+		Board b = new Board(h, w, numP );
 	}
 	
-	public ArrayList<Card> genAns()
-	{
-		Random rand = new Random();
-		int r1 = rand.nextInt(6);
-	}
+	
 		
 	public static void main(String [ ] args)
 	{

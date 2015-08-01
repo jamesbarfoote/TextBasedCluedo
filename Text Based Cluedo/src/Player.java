@@ -9,10 +9,12 @@ public class Player {
 	private int roll;
 	private Room room;
 	private Map<Room, Integer> roomDistances = new HashMap<Room, Integer>();
+	private int playerNum;
 
-	public Player (ArrayList<Card> hand, Location location){
+	public Player (ArrayList<Card> hand, Location location, int playerNum){
 		this.cards = hand;
 		this.location = location;
+		this.playerNum = playerNum;
 	}
 
 
@@ -96,5 +98,10 @@ public class Player {
 
 	public Map<Room, Integer> getRoomDist(){
 		return roomDistances;
+	}
+	
+	public int getNum()
+	{
+		return playerNum;
 	}
 }

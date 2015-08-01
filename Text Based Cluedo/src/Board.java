@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Board {
 
@@ -6,10 +7,19 @@ public class Board {
 	public static ArrayList<Player> players;
 	private int width, height;
 	
-	public Board(int width, int height) {
-		this.answer = answer;
-		this.players = players;
+	public Board(int width, int height, int numP) {
+		this.answer = genAns();
+		this.players = genPlayers(numP);
 		this.width = width;
 		this.height = height;
+	}
+	
+	public ArrayList<Card> genPlayers(int numPlayers)
+	{
+		ArrayList<Player> players = new ArrayList<Player>();
+		Random rand = new Random();
+		int r1 = rand.nextInt(6);
+		
+		return players;
 	}
 }
