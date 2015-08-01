@@ -14,7 +14,12 @@ public class Player {
 	public Player (Location location, int playerNum){
 		this.location = location;
 		this.playerNum = playerNum;
+		
+		
+		
+		
 	}
+
 
 
 	public void rollDice(){

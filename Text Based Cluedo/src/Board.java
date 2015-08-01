@@ -7,10 +7,8 @@ public class Board {
 	public static ArrayList<Card> answer;
 	public static ArrayList<Player> players;
 	private int width, height;
-	private ArrayList<String> weapons = new ArrayList<>(
-			Arrays.asList("Candlestick", "Dagger", "Revolver", "Rope", "Lead Pipe", "Spanner"));
-	private ArrayList<String> rooms = new ArrayList<>(Arrays.asList("Kitchen", "Ballroom", "Conservatory",
-			"Billiard Room", "Library", "Study", "Hall", "Lounge", "Dining Room"));
+	private ArrayList<String> weapons = new ArrayList<>(Arrays.asList("Candlestick", "Dagger", "Revolver", "Rope", "Lead Pipe", "Spanner"));
+	private ArrayList<String> rooms = new ArrayList<>(Arrays.asList("Kitchen", "Ballroom", "Conservatory","Billiard Room", "Library", "Study", "Hall", "Lounge", "Dining Room"));
 	private ArrayList<String> characters = new ArrayList<>(Arrays.asList("Miss Scarlett", "Colonel Mustard",
 			"Mrs. White", "The Reverend Green", "Mrs. Peacock", "Professor Plum"));
 
@@ -52,6 +50,11 @@ public class Board {
 		cards.add(c);
 
 		return cards;
+	}
+	
+	public ArrayList<Player> getPlayers()
+	{
+		return players;
 	}
 
 //	public boolean removePlayer(Player p) {
