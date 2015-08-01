@@ -31,10 +31,12 @@ public class Main {
 				Map<Room, Integer> rDist = p.getRoomDist();
 				int i = 0;
 				//look at room distances map and print out each entry
+				ArrayList<Room> rooms = new ArrayList<Room>();
 				for(Entry<Room, Integer> e: rDist.entrySet())
 				{
 					Room cr = e.getKey();
 					int dist = e.getValue();
+					rooms.add(cr);
 					System.out.println(i + " " + cr + " " + dist);
 					i++;
 				}
@@ -45,10 +47,12 @@ public class Main {
 				
 				//give option for movement (dont have to)
 				System.out.println("Where do you want to move to?");
+				int numChoice = scan.nextInt();
 				
-				//update location
-				//r = index chosen
+				//update locatio
+				r = rooms.get(numChoice);
 				p.updateLocation(r);
+				
 				//make a guess option (suggestion, accusation OR nothing)
 				//if(input == 1 || 2){ 1 = suggestion 2 = accusation, 3 = nothing
 					
