@@ -29,7 +29,7 @@ public class Main {
 			{
 				Room r = null;
 				//calculate distances	
-				p.calculateDistances();
+				p.calculateDistances(b);
 				System.out.println("Calculated distances");
 				Map<Room, Integer> rDist = p.getRoomDist();
 				int i = 0;
