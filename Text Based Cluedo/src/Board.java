@@ -7,33 +7,56 @@ public class Board {
 	public static ArrayList<Card> answer;
 	public static ArrayList<Player> players;
 	private int width, height;
-	private ArrayList<String> weapons = new ArrayList<>(Arrays.asList("Candlestick", "Dagger", "Revolver", "Rope", "Lead Pipe", "Spanner"));
-	private ArrayList<String> rooms = new ArrayList<>(Arrays.asList("Kitchen", "Ballroom", "Conservatory","Billiard Room", "Library", "Study", "Hall", "Lounge", "Dining Room"));
-	private ArrayList<String> characters = new ArrayList<>(Arrays.asList("Miss Scarlett", "Colonel Mustard","Mrs. White", "The Reverend Green", "Mrs. Peacock", "Professor Plum"));
+	private ArrayList<String> weaponNames = new ArrayList<>(Arrays.asList("Candlestick", "Dagger", "Revolver", "Rope", "Lead Pipe", "Spanner"));
+	private ArrayList<String> characterNames = new ArrayList<>(Arrays.asList("Miss Scarlett", "Colonel Mustard","Mrs. White", "The Reverend Green", "Mrs. Peacock", "Professor Plum"));
+	private ArrayList<String> roomNames = new ArrayList<>(Arrays.asList("Kitchen", "Ballroom", "Conservatory","Billiard Room", "Library", "Study", "Hall", "Lounge", "Dining Room"));
+
+	private ArrayList<Weapon> weapons = new ArrayList<Weapon>();
+	private ArrayList<Character> characters = new ArrayList<Character>();
+	private ArrayList<Room> rooms = new ArrayList<Room>();
 
 	public Board(int width, int height, int numP) {
 		this.answer = genAns();
 		this.players = genPlayers(numP);
 		this.width = width;
 		this.height = height;
-
-		// create weapon array
-		// create character array
-		// create room array
 	}
 
-	public ArrayList<Player> genPlayers(int numPlayers) {
+	/**
+	 * Create the cards from the names provided in the Board class.
+	 * @param cards
+	 */
+	private void createCards(ArrayList<String> cards){
+		for(String card : cards){
+			if(cards == weaponNames || cards == characterNames){
+				
+			}
+			if(cards == roomNames){
+
+			}
+		}
+	}
+
+	/**
+	 * Create the players and delegate cards to their hand
+	 * until only 1 element is left in each of the cards arrays.
+	 * @param numPlayers
+	 * @return
+	 */
+	private ArrayList<Player> genPlayers(int numPlayers) {
 		ArrayList<Player> players = new ArrayList<Player>();
 		Random rand = new Random();
-		int r1 = rand.nextInt(6);
+		int weaponNum = rand.nextInt(weapons.size());
+		int characterNum = rand.nextInt(characters.size());
+		int RoomNum = rand.nextInt(rooms.size());
+
 		// For each player
-		// Give w, r, r until there is only 1 item left in each array
+		// Give w, r, character until there is only 1 item left in each array
 		return players;
 	}
 
-	// Delegate cards method
 
-	public ArrayList<Card> genAns() {
+	private ArrayList<Card> genAns() {
 		ArrayList<Card> cards = new ArrayList<Card>();
 		Room r = new Room(rooms.get(0), null);
 		rooms.remove(0);
@@ -51,11 +74,8 @@ public class Board {
 		return cards;
 	}
 
-//	public boolean removePlayer(Player p) {
-//		players.remove(p);
-//		if (players.contains(p)) {
-//			return true;
-//		}
-//		return false;
-//	}
+	public ArrayList<Player> getPlayers()
+	{
+		return players;
+	}
 }

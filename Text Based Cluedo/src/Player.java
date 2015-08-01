@@ -12,14 +12,16 @@ public class Player {
 
 	public Player (Location location, int playerNum){
 		this.location = location;
-		this.playerNum = playerNum;
+		this.playerNum = playerNum;	
 	}
 
 
-	public void rollDice(){
+
+	public int rollDice(){
 		Random rand = new Random();
 		roll = rand.nextInt(6);
 		System.out.println(roll);
+		return roll;
 	}
 	
 	public void addToHand(Card c){
