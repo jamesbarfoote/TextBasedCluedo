@@ -70,7 +70,6 @@ public class Player {
 
 	/**
 	 * calculates the distances from the current location to all of the rooms.
-	 * @param r
 	 */
 	public void calculateDistances(){	//Still need to call this method somewhere
 		for(Room r : roomDistances.keySet()){

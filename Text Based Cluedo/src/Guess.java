@@ -64,10 +64,14 @@ public class Guess {
 
 	/**
 	 * Check to see if the Accusation is equal to the answer, if it is then the
-	 * player who made the accusation wins. Otherwise ...
+	 * player who made the accusation wins. Otherwise they are eliminated from
+	 * the game and their cards are delegated out to the remaining players.
 	 */
-	private void Accusation(List<Card> guess) { // What happens after a player
-												// is eliminated?
-
+	private void Accusation(List<Card> guess) {
+		for (Card card : guess) {
+			if(Board.answer.contains(card){
+				
+			}
+		}
 	}
 }
