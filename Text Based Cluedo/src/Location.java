@@ -1,21 +1,11 @@
 
 public class Location {
-	private Player player;
 	private int x = 0;
 	private int y = 0;
 
-	public Location(Player p, int x, int y) {
-		this.player = p;
+	public Location( int x, int y) {
 		this.x = x;
 		this.y = y;
-	}
-
-	public Player getPlayer() {
-		return player;
-	}
-
-	public void setPlayer(Player player) {
-		this.player = player;
 	}
 
 	public int getX() {

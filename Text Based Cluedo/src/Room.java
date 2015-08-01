@@ -8,8 +8,10 @@ public class Room extends Card{
 	//private int width, height;
 	
 	public Room(String name, Location location){
+		System.out.println("Location for " + name + " is " + location);
 		this.name = name;
 		this.location = location;
+		
 		//this.width = width;
 		//this.height = height;
 	}

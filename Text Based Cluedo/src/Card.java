@@ -8,7 +8,7 @@ public abstract class Card {
 		return false;
 	}
 
-	private String getName() {
+	public String getName() {
 		if(this instanceof Room){
 			Room room = (Room) this;
 			return room.getName();

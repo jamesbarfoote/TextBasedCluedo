@@ -23,6 +23,7 @@ public class Board {
 		genPlayers(numP);
 		this.width = width;
 		this.height = height;
+		System.out.println(rooms.get(5).getLocation().getX());
 	}
 
 	/**

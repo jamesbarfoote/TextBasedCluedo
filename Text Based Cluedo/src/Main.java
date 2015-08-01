@@ -41,7 +41,7 @@ public class Main {
 					Room cr = e.getKey();
 					int dist = e.getValue();
 					rooms.add(cr);
-					System.out.println(i + " " + cr + " " + dist);
+					System.out.println(i + " " + cr.getName() + " " + dist);
 					i++;
 				}
 					
@@ -69,7 +69,9 @@ public class Main {
 			    	System.out.println("Please type the 3 cards that you are guessing on a new line");
 			    	System.out.println("In this order: Room, Weapon, Character");
 			    	//get cards from typed input on new line
-			    	Room g = new Room(scan.next(), null);
+			    	String roomName = scan.next();
+			    	int index = b.getRoomNames().indexOf(roomName);
+			    	Room g = b.getRooms().get(index);
 			    	Weapon gw = new Weapon(scan.next());
 			    	Character gc = new Character(scan.next());
 			    	ArrayList<Card> guessHand = new ArrayList<Card>();

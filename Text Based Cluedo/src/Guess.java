@@ -25,11 +25,17 @@ public class Guess {
 		Room room = null;
 		Card discoveredCard = null;
 		ArrayList<Player> players = Board.players;
+		//System.out.println("Guess = " + guess.size());
 		for (Card card : guess) {
+			//System.out.println("Card = " + card.getName());
 			if (card instanceof Room) {
+				//System.out.println("Room = " + card.getName());
 				room = (Room) card;
 			}
 		}
+		//System.out.println("player.getLocation() = " + player.getLocation());
+		System.out.println("room.getLocation() = " + room.getLocation());
+		
 		if (player.getLocation().equals(room.getLocation())) {
 			for (Card card : guess) {
 				int playerNum = player.getNum();
