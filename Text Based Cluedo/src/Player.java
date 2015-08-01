@@ -66,9 +66,10 @@ public class Player {
 
 	/**
 	 * calculates the distances from the current location to all of the rooms.
+	 * @param b - The current board
 	 */
-	public void calculateDistances(){
-		for(Room r : roomDistances.keySet()){
+	public void calculateDistances(Board b){
+		for(Room r : b.getRooms()){
 			Location roomLocation = r.getLocation();
 			int distance = Math.abs(roomLocation.getX() - location.getX()) + Math.abs(roomLocation.getY() - location.getY());
 			roomDistances.put(r, distance);
