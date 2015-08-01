@@ -7,7 +7,6 @@ public class Player {
 	private ArrayList<Card> hand = new ArrayList<Card>();
 	private Location location;
 	private int roll;
-	private Room room;
 	private Map<Room, Integer> roomDistances = new HashMap<Room, Integer>();
 	private int playerNum;
 
@@ -28,16 +27,8 @@ public class Player {
 	}
 
 	/**
-	 * To calculate the new location of the player, the update location method will need to take the location of the room it is going to,
-	 * the distance to the room, the dice roll and the current location of the player.
-	 * 
-	 * if location.x < current location.x, move left until it isn't anymore.
-	 * if location.x > current location.x, move right until it isn't anymore.
-	 * if location.y < location.y, move up until it isn't anymore.
-	 * if location.y > location.y, move down until it isn't anymore.
-	 * 
-	 * @param Target Room - Room
-	 * @return New Location - Location
+	 * Given a room the player wants to go to, calculates the new location.
+	 * @param r - Target Room.
 	 */
 	public void updateLocation(Room r) throws IllegalStateException{
 		int stepsRemaining = roll;
@@ -74,7 +65,7 @@ public class Player {
 	/**
 	 * calculates the distances from the current location to all of the rooms.
 	 */
-	public void calculateDistances(){	//Still need to call this method somewhere
+	public void calculateDistances(){
 		for(Room r : roomDistances.keySet()){
 			Location roomLocation = r.getLocation();
 			int distance = Math.abs(roomLocation.getX() - location.getX()) + Math.abs(roomLocation.getY() - location.getY());

@@ -4,6 +4,7 @@ import java.util.List;
 public class Guess {
 
 	private Player player;
+	private boolean Won = false;
 
 	public Guess(boolean suggestion, List<Card> guess, Player player) {
 		this.player = player;
@@ -51,6 +52,9 @@ public class Guess {
 				}
 			}
 		}
+		else{
+			System.out.println("Must be in the room to suggest it");
+		}
 		if (discoveredCard != null) {
 			for (Player p : players) {
 				p.addToHand(discoveredCard);
@@ -76,6 +80,6 @@ public class Guess {
 				Board.players.remove(player);
 			}
 		}
-		//player wins
+		this.Won = true;
 	}
 }

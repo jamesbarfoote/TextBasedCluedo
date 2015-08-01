@@ -7,12 +7,9 @@ public class Board {
 	public static ArrayList<Card> answer;
 	public static ArrayList<Player> players;
 	private int width, height;
-	private ArrayList<String> weapons = new ArrayList<>(
-			Arrays.asList("Candlestick", "Dagger", "Revolver", "Rope", "Lead Pipe", "Spanner"));
-	private ArrayList<String> rooms = new ArrayList<>(Arrays.asList("Kitchen", "Ballroom", "Conservatory",
-			"Billiard Room", "Library", "Study", "Hall", "Lounge", "Dining Room"));
-	private ArrayList<String> characters = new ArrayList<>(Arrays.asList("Miss Scarlett", "Colonel Mustard",
-			"Mrs. White", "The Reverend Green", "Mrs. Peacock", "Professor Plum"));
+	private ArrayList<String> weapons = new ArrayList<>(Arrays.asList("Candlestick", "Dagger", "Revolver", "Rope", "Lead Pipe", "Spanner"));
+	private ArrayList<String> rooms = new ArrayList<>(Arrays.asList("Kitchen", "Ballroom", "Conservatory","Billiard Room", "Library", "Study", "Hall", "Lounge", "Dining Room"));
+	private ArrayList<String> characters = new ArrayList<>(Arrays.asList("Miss Scarlett", "Colonel Mustard","Mrs. White", "The Reverend Green", "Mrs. Peacock", "Professor Plum"));
 
 	public Board(int width, int height, int numP) {
 		this.answer = genAns();
@@ -34,7 +31,7 @@ public class Board {
 		return players;
 	}
 
-	// Deligate cards method
+	// Delegate cards method
 
 	public ArrayList<Card> genAns() {
 		ArrayList<Card> cards = new ArrayList<Card>();
