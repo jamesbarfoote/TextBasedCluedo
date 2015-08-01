@@ -29,7 +29,7 @@ public class Board {
 	 * Create the cards from the names provided in the Board class.
 	 * @param cards
 	 */
-	private void createCards(){		//Need to decide on locations for all the rooms.
+	private void createCards(){
 		for(String weapon : weaponNames){
 			weapons.add(new Weapon(weapon));
 		}
@@ -38,31 +38,31 @@ public class Board {
 		}
 		for(String room : roomNames){
 			if(room.equals("Kitchen")){
-				rooms.add(new Room(room, null));
+				rooms.add(new Room(room, new Location(6,4)));
 			}
 			if(room.equals("Ballroom")){
-				rooms.add(new Room(room, null));
+				rooms.add(new Room(room, new Location(13,4)));
 			}
 			if(room.equals("Conservatory")){
-				rooms.add(new Room(room, null));
+				rooms.add(new Room(room, new Location(20,4)));
 			}
 			if(room.equals("Billiard Room")){
-				rooms.add(new Room(room, null));
+				rooms.add(new Room(room, new Location(20,9)));
 			}
 			if(room.equals("Library")){
-				rooms.add(new Room(room, null));
+				rooms.add(new Room(room, new Location(20,14)));
 			}
 			if(room.equals("Study")){
-				rooms.add(new Room(room, null));
+				rooms.add(new Room(room, new Location(20,19)));
 			}
 			if(room.equals("Hall")){
-				rooms.add(new Room(room, null));
+				rooms.add(new Room(room, new Location(13,19)));
 			}
 			if(room.equals("Lounge")){
-				rooms.add(new Room(room, null));
+				rooms.add(new Room(room, new Location(6,19)));
 			}
 			if(room.equals("Dining Room")){
-				rooms.add(new Room(room, null));
+				rooms.add(new Room(room, new Location(6,11)));
 			}
 		}
 		allCards.addAll(weapons);
@@ -98,28 +98,28 @@ public class Board {
 	 * @param numPlayers
 	 * @return
 	 */
-	private void genPlayers(int numPlayers) {	//Need to add starting locations for the players.
+	private void genPlayers(int numPlayers) {
 		Random rand = new Random();
 		int characterNum = rand.nextInt(characters.size());
 		int count = 0;
 		while(count < numPlayers){
 			if(characterNames.get(characterNum) == "Miss Scarlett"){
-				players.add(new Player("Miss Scarlett", null, count));
+				players.add(new Player("Miss Scarlett", new Location(10,0), count));
 			}
 			if(characterNames.get(characterNum) == "Colonel Mustard"){
-				players.add(new Player("Colonel Mustard", null, count));
+				players.add(new Player("Colonel Mustard", new Location(18,0), count));
 			}
 			if(characterNames.get(characterNum) == "Mrs. White"){
-				players.add(new Player("Mrs. White", null, count));
+				players.add(new Player("Mrs. White", new Location(25,5), count));
 			}
 			if(characterNames.get(characterNum) == "The Reverend Green"){
-				players.add(new Player("The Reverend Green", null, count));
+				players.add(new Player("The Reverend Green", new Location(16,25), count));
 			}
 			if(characterNames.get(characterNum) == "Mrs. Peacock"){
-				players.add(new Player("Mrs. Peacock", null, count));
+				players.add(new Player("Mrs. Peacock", new Location(7,25), count));
 			}
 			if(characterNames.get(characterNum) == "Professor Plum"){
-				players.add(new Player("Professor Plum", null, count));
+				players.add(new Player("Professor Plum", new Location(0,16), count));
 			}
 			count++;
 		}
