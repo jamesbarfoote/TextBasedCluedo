@@ -39,7 +39,8 @@ public class Main {
 		playerNum = (playerNum % b.getPlayers().size()) + 1;
 		Player currentPlayer = b.getPlayers().get(playerNum - 1);
 		Player eliminatedPlayer = null;
-		while (finished == false) {		
+		while (finished == false) {	
+			System.out.println("------------------------------------------------");
 			System.out.println("");
 			System.out.println("You are " + currentPlayer.getName());
 			// System.out.println("Number of player:" + b.getPlayers().size());
@@ -51,7 +52,7 @@ public class Main {
 			// System.out.println("Calculated distances");
 
 			Map<Room, Integer> rDist = currentPlayer.getRoomDist();
-			int i = 0;
+			int i = 1;
 			// look at room distances map and print out each entry
 			ArrayList<Room> rooms = new ArrayList<Room>();
 			// System.out.println("rDist size = " + rDist.size());
@@ -76,10 +77,10 @@ public class Main {
 			String numC = scan.next();
 			int numChoice = 0;
 			
-			numChoice = isCorrectNumber(scan, 6, numC);
+			numChoice = isCorrectNumber(scan, 9, numC);
 
 			// update location
-			r = rooms.get(numChoice);
+			r = rooms.get(numChoice-1);
 			currentPlayer.updateLocation(r);
 			scan.useDelimiter(System.getProperty("line.separator"));
 			// make a guess option (suggestion, accusation OR nothing)
@@ -89,7 +90,10 @@ public class Main {
 			if (distToRoom > diceNum) {
 				System.out.println("1 - Accusation");
 				System.out.println("2 - Nothing");
-				int option = scan.nextInt();
+				String stringOption = scan.next();
+				int option = 0;
+				
+				option = isCorrectNumber(scan, 2, stringOption);
 
 				if (option == 1) {
 
@@ -133,7 +137,10 @@ public class Main {
 				System.out.println("1 - Suggestion");
 				System.out.println("2 - Accusation");
 				System.out.println("3 - Nothing");
-				int option = scan.nextInt();
+				String stringOption = scan.next();
+				int option = 0;
+				
+				option = isCorrectNumber(scan, 3, stringOption);
 				if (option == 1 || option == 2) {
 
 					System.out.println("Please type the 3 cards that you are guessing on a new line");
@@ -232,7 +239,7 @@ public class Main {
 		while(true){
 			if(isInteger(numP)){
 				numPlayers = Integer.parseInt(numP); 
-				if((numPlayers > 0) && (numPlayers<maxNum)){
+				if((numPlayers > 0) && (numPlayers<=maxNum)){
 					break;
 				}
 			}
