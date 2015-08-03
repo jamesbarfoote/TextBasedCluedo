@@ -41,7 +41,7 @@ public class Guess {
 				playerNum = (playerNum % Board.players.size()) + 1;
 				int start = player.getNum();
 				while (playerNum != start) {
-					ArrayList<Card> cards = players.get(playerNum).getCards();
+					ArrayList<Card> cards = players.get(playerNum-1).getCards();
 					for (Card c : cards) {
 						if (c.equals(card)) {
 							discoveredCard = c;
@@ -81,7 +81,7 @@ public class Guess {
 			if(!Board.answer.contains(card)){
 				entered = true;
 				int playerNum = player.getNum();
-				playerNum = (playerNum % Board.players.size()) + 1;
+				//playerNum = (playerNum % Board.players.size()) + 1;
 				int start = player.getNum();
 				int i = 0;
 				while (playerNum != start) {	//For every player

@@ -95,4 +95,8 @@ public class Player {
 	{
 		return playerNum;
 	}
+	
+	public String getName(){
+		return name;
+	}
 }

@@ -23,6 +23,9 @@ public class Board {
 		genPlayers(numP);
 		this.width = width;
 		this.height = height;
+		for(Card c : allCards){
+			System.out.println(c.getName());
+		}
 	}
 
 	/**
@@ -102,7 +105,9 @@ public class Board {
 		Random rand = new Random();
 		int characterNum = rand.nextInt(characters.size());
 		int count = 0;
+		ArrayList<Integer> usedCharacters = new ArrayList<Integer>();
 		while(count < numPlayers){
+			usedCharacters.add(characterNum);
 			if(characterNames.get(characterNum) == "Miss Scarlett"){
 				players.add(new Player("Miss Scarlett", new Location(10,0), count));
 			}
@@ -122,15 +127,31 @@ public class Board {
 				players.add(new Player("Professor Plum", new Location(0,16), count));
 			}
 			count++;
-			characterNum = rand.nextInt(characters.size());
-
+			while(true){
+				int newCharacterNum = rand.nextInt(characters.size());
+				if(usedCharacters.contains(newCharacterNum) == false || count == 6){
+					characterNum = newCharacterNum;
+					break;
+				}
+			}
 		}
 		Collections.shuffle(allCards);
-		int index = 0;
-		for(Player player : players){
-			player.addToHand(allCards.get(index));
-			allCards.remove(index);
-			index++;
+		int numCards = allCards.size();
+		for(Player p: players)
+		{
+			
+			int i = 0;
+			int j = 0;
+			while(i <(numCards/players.size() ) )
+			{
+				p.addToHand(allCards.get(i));
+				i++;
+			}
+			while(j <(numCards/players.size()  ))
+			{
+				allCards.remove(0);
+				j++;
+			}
 		}
 	}
 

@@ -19,7 +19,7 @@ public class Main {
 		
 		Board b = new Board(h, w, numP);
 		
-		int playerNum = 1;
+		int playerNum = 0;
 		
 		playGame(scan, b, playerNum);
 	}
@@ -35,10 +35,14 @@ public class Main {
 	 */
 	public static void playGame(Scanner scan, Board b, int playerNum){
 		playerNum = (playerNum % b.getPlayers().size()) + 1;
-		Player currentPlayer = b.getPlayers().get(playerNum);
+		Player currentPlayer = b.getPlayers().get(playerNum-1);
 		Player eliminatedPlayer = null;
-		System.out.println("Number of player:" + b.getPlayers().size());
 		while (finished == false) {
+			System.out.println("Current player is " + playerNum + " - " + currentPlayer.getName());
+			System.out.println("Number of player:" + b.getPlayers().size());
+			for(Card c : currentPlayer.getCards()){
+				System.out.println(c.getName());
+			}
 			//System.out.println(p.getNum());
 			//System.out.println(p.getLocation().getX());
 			Room r = null;
@@ -69,7 +73,7 @@ public class Main {
 			//update location
 			r = rooms.get(numChoice);
 			currentPlayer.updateLocation(r);
-			scan.useDelimiter(System.getProperty("line.separator"));
+			scan.useDelimiter(System.getProperty("line.separator"));	//Doesn't parse full stops
 			//make a guess option (suggestion, accusation OR nothing)
 			System.out.println("What would you like to do?");
 			System.out.println("1 - Suggestion");
@@ -115,7 +119,7 @@ public class Main {
 		    	
 		    }
 		    playerNum = (playerNum % b.getPlayers().size()) + 1;
-		    currentPlayer = b.getPlayers().get(playerNum);
+		    currentPlayer = b.getPlayers().get(playerNum-1);
 		}
 		
 		playerNum = (playerNum % Board.players.size()) - 1;
