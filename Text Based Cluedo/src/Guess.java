@@ -82,19 +82,20 @@ public class Guess {
 			if(!Board.answer.contains(card)){
 				entered = true;
 				int playerNum = player.getNum();
-				//playerNum = (playerNum % Board.players.size()) + 1;
+				playerNum = (playerNum % Board.players.size()) + 1;
 				int start = player.getNum();
-				int i = 0;
-				while (playerNum != start) {	//For every player
+				while (true) {	//For every player
 					if(player.getCards().isEmpty()){
 						break;
 					}
-					if(Board.players.get(playerNum)!=player){
-						Board.players.get(playerNum).addToHand(player.getCards().get(i));
-						player.getCards().remove(i);
+					if(Board.players.get(playerNum-1)!=player){
+						Board.players.get(playerNum-1).addToHand(player.getCards().get(0));
+						player.getCards().remove(0);
 					}
-					i++;
 					playerNum = (playerNum % Board.players.size()) + 1;
+					if(playerNum == start){
+						playerNum = (playerNum % Board.players.size()) + 1;
+					}
 				}
 				eliminatedPlayer = player;
 			}
@@ -106,8 +107,7 @@ public class Guess {
 		
 	}
 	
-	public boolean hasWon()
-	{
+	public boolean hasWon(){
 		return won;
 	}
 	

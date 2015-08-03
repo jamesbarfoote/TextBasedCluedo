@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 
 public class Player {
 	private ArrayList<Card> hand = new ArrayList<Card>();

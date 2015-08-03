@@ -4,7 +4,6 @@ import java.util.Map.Entry;
 import java.util.Scanner;
 
 public class Main {
-	private static ArrayList<Player> players;
 	private static boolean finished = false;
 	
 	public static void createGame(Scanner scan){
@@ -40,6 +39,7 @@ public class Main {
 		while (finished == false) {
 			System.out.println("Current player is " + playerNum + " - " + currentPlayer.getName());
 			System.out.println("Number of player:" + b.getPlayers().size());
+			System.out.println("Size of hand is: " + currentPlayer.getCards().size());
 			//System.out.println(p.getNum());
 			//System.out.println(p.getLocation().getX());
 			Room r = null;
@@ -70,7 +70,7 @@ public class Main {
 			//update location
 			r = rooms.get(numChoice);
 			currentPlayer.updateLocation(r);
-			scan.useDelimiter(System.getProperty("line.separator"));	//Doesn't parse full stops
+			scan.useDelimiter(System.getProperty("line.separator"));
 			//make a guess option (suggestion, accusation OR nothing)
 			System.out.println("What would you like to do?");
 			System.out.println("1 - Suggestion");
@@ -122,7 +122,7 @@ public class Main {
 		}
 		
 		playerNum = (playerNum % Board.players.size()) - 1;
-		b.players.remove(eliminatedPlayer);
+		Board.players.remove(eliminatedPlayer);
 		while(b.getPlayers().size() > 1){
 			playGame(scan, b, playerNum);
 		}

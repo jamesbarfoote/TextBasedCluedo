@@ -7,7 +7,6 @@ public class Board {
 
 	public static ArrayList<Card> answer;
 	public static ArrayList<Player> players = new ArrayList<Player>();
-	private int width, height;
 	private ArrayList<String> weaponNames = new ArrayList<>(Arrays.asList("Candlestick", "Dagger", "Revolver", "Rope", "Lead Pipe", "Spanner"));
 	private ArrayList<String> characterNames = new ArrayList<>(Arrays.asList("Miss Scarlett", "Colonel Mustard","Mrs. White", "The Reverend Green", "Mrs. Peacock", "Professor Plum"));
 	private ArrayList<String> roomNames = new ArrayList<>(Arrays.asList("Kitchen", "Ballroom", "Conservatory","Billiard Room", "Library", "Study", "Hall", "Lounge", "Dining Room"));
@@ -19,13 +18,11 @@ public class Board {
 
 	public Board(int width, int height, int numP) {
 		createCards();
-		this.answer = genAns();
-		for(Card c : this.answer){
+		Board.answer = genAns();
+		for(Card c : Board.answer){
 			System.out.println(c.getName());
 		}
 		genPlayers(numP);
-		this.width = width;
-		this.height = height;
 	}
 
 	/**
@@ -135,22 +132,28 @@ public class Board {
 				}
 			}
 		}
+		//Delegate the cards out to the players.
 		Collections.shuffle(allCards);
 		int numCards = allCards.size();
-		for(Player p: players)
-		{
-			
+		for(Player p: players){
 			int i = 0;
 			int j = 0;
-			while(i <(numCards/players.size()))
-			{
+			while(i <(numCards/players.size())){
 				p.addToHand(allCards.get(i));
 				i++;
 			}
-			while(j <(numCards/players.size()))
-			{
+			while(j <(numCards/players.size())){
 				allCards.remove(0);
 				j++;
+			}
+		}
+		//if any cards still need to be delegated, do the rest.
+		if(allCards.size()>0){
+			for(Player p : players){
+				if(allCards.size() > 0){
+					p.addToHand(allCards.get(0));
+					allCards.remove(0);
+				}
 			}
 		}
 	}
