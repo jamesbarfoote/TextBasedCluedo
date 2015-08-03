@@ -56,7 +56,7 @@ public class Main {
 				//update location
 				r = rooms.get(numChoice);
 				p.updateLocation(r);
-				
+				scan.useDelimiter(System.getProperty("line.separator"));
 				//make a guess option (suggestion, accusation OR nothing)
 				System.out.println("What would you like to do?");
 				System.out.println("1 - Suggestion");
