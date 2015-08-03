@@ -24,15 +24,17 @@ public class Main {
 		
 		while(finished == false)
 		{
-			haveTurns(players, scan, b);
+			System.out.println("Looped-----------------------------");
+			players = haveTurns(players, scan, b);
 			System.out.println("There are " + players.size() + " players");
 		//for each player
 			
 		}
 	}
 	
-	public static void haveTurns(ArrayList<Player> players, Scanner scan, Board b)
+	public static ArrayList<Player> haveTurns(ArrayList<Player> players, Scanner scan, Board b)
 	{
+		ArrayList<Player> play = players;
 		for(Player p: players)
 		{
 			System.out.println(p.getNum());
@@ -103,17 +105,18 @@ public class Main {
 		    	}
 		    	
 				Guess n = new Guess(opt, guessHand, p);
-				ArrayList<Player> play = b.getPlayers();
-				players = play;
+				play = b.getPlayers();
+				if(play.size() < players.size())
+				{
+					break;
+				}
+				
 				if (n.hasWon()) { finished = true;}
 		    	
 		    }
-				
-				
-				
 			//end turn 
 		}
-		
+		return play;		
 	}
 		
 	public static void main(String [ ] args)
