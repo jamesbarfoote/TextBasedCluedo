@@ -122,6 +122,8 @@ public class Board {
 				players.add(new Player("Professor Plum", new Location(0,16), count));
 			}
 			count++;
+			characterNum = rand.nextInt(characters.size());
+
 		}
 		Collections.shuffle(allCards);
 		int index = 0;
