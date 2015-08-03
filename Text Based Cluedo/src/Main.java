@@ -8,23 +8,14 @@ public class Main {
 
 	public static void createGame(Scanner scan) {
 		System.out.println("Welcome to Cluedo!");
-		String numP = "";
-		int numPlayers = 0;
 
 		// ask for how many players are playing
 		System.out.println("How many players?");
-		numP = scan.next();
-		while(true){
-			if(isInteger(numP)){
-				numPlayers = Integer.parseInt(numP); 
-				if((numPlayers > 0) && (numPlayers<7)){
-					break;
-				}
-			}
-			System.out.println("Must be between 1 and 6 players");
-			numP = scan.next();
-		}
-
+		String numP = scan.next();
+		int numPlayers = 0;
+		
+		numPlayers = isCorrectNumber(scan, 6, numP);
+		
 		Board b = new Board(numPlayers);
 
 		int playerNum = 0;
@@ -82,7 +73,10 @@ public class Main {
 
 			// give option for movement (dont have to)
 			System.out.println("Where do you want to move to?");
-			int numChoice = scan.nextInt();
+			String numC = scan.next();
+			int numChoice = 0;
+			
+			numChoice = isCorrectNumber(scan, 6, numC);
 
 			// update location
 			r = rooms.get(numChoice);
@@ -232,6 +226,21 @@ public class Main {
 		   // only got here if we didn't return false
 		   return true;
 		}
+	
+	private static int isCorrectNumber(Scanner scan, int maxNum, String numP){
+		int numPlayers = 0;
+		while(true){
+			if(isInteger(numP)){
+				numPlayers = Integer.parseInt(numP); 
+				if((numPlayers > 0) && (numPlayers<maxNum)){
+					break;
+				}
+			}
+			System.out.println("Input must be between 1 and " + maxNum);
+			numP = scan.next();
+		}
+		return numPlayers;
+	}
 
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
