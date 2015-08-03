@@ -40,9 +40,6 @@ public class Main {
 		while (finished == false) {
 			System.out.println("Current player is " + playerNum + " - " + currentPlayer.getName());
 			System.out.println("Number of player:" + b.getPlayers().size());
-			for(Card c : currentPlayer.getCards()){
-				System.out.println(c.getName());
-			}
 			//System.out.println(p.getNum());
 			//System.out.println(p.getLocation().getX());
 			Room r = null;
@@ -115,6 +112,8 @@ public class Main {
 				}
 				else if (guess.hasWon()) { 
 					finished = true;
+					System.out.println("Congratulations " + currentPlayer.getName() + " you have won!");
+					return;
 				}
 		    	
 		    }

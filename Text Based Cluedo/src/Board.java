@@ -20,12 +20,12 @@ public class Board {
 	public Board(int width, int height, int numP) {
 		createCards();
 		this.answer = genAns();
+		for(Card c : this.answer){
+			System.out.println(c.getName());
+		}
 		genPlayers(numP);
 		this.width = width;
 		this.height = height;
-		for(Card c : allCards){
-			System.out.println(c.getName());
-		}
 	}
 
 	/**
@@ -142,12 +142,12 @@ public class Board {
 			
 			int i = 0;
 			int j = 0;
-			while(i <(numCards/players.size() ) )
+			while(i <(numCards/players.size()))
 			{
 				p.addToHand(allCards.get(i));
 				i++;
 			}
-			while(j <(numCards/players.size()  ))
+			while(j <(numCards/players.size()))
 			{
 				allCards.remove(0);
 				j++;
