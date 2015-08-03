@@ -5,6 +5,7 @@ public class Guess {
 
 	private Player player;
 	private boolean won = false;
+	private Player eliminatedPlayer;
 
 	public Guess(boolean suggestion, List<Card> guess, Player player) {
 		this.player = player;
@@ -37,9 +38,9 @@ public class Guess {
 		if (player.getLocation().equals(room.getLocation())) {
 			for (Card card : guess) {
 				int playerNum = player.getNum();
+				playerNum = (playerNum % Board.players.size()) + 1;
 				int start = player.getNum();
 				while (playerNum != start) {
-					playerNum = (playerNum % players.size()) + 1;
 					ArrayList<Card> cards = players.get(playerNum).getCards();
 					for (Card c : cards) {
 						if (c.equals(card)) {
@@ -47,7 +48,7 @@ public class Guess {
 							break;
 						}
 					}
-					
+					playerNum = (playerNum % Board.players.size()) + 1;
 					if (discoveredCard != null) {
 						break;
 					}
@@ -80,11 +81,10 @@ public class Guess {
 			if(!Board.answer.contains(card)){
 				entered = true;
 				int playerNum = player.getNum();
+				playerNum = (playerNum % Board.players.size()) + 1;
 				int start = player.getNum();
 				int i = 0;
 				while (playerNum != start) {	//For every player
-					playerNum = (playerNum % Board.players.size()) + 1;
-
 					if(player.getCards().isEmpty()){
 						break;
 					}
@@ -93,8 +93,9 @@ public class Guess {
 						player.getCards().remove(i);
 					}
 					i++;
+					playerNum = (playerNum % Board.players.size()) + 1;
 				}
-				Board.players.remove(player);
+				eliminatedPlayer = player;
 			}
 		}
 		if(entered == false && !guess.contains(null)){
@@ -107,5 +108,9 @@ public class Guess {
 	public boolean hasWon()
 	{
 		return won;
+	}
+	
+	public Player getEliminatedPlayer(){
+		return eliminatedPlayer;
 	}
 }

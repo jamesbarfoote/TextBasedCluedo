@@ -1,55 +1,56 @@
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
+	private static ArrayList<Player> players;
 	private static boolean finished = false;
 	
-	public static void playGame(Scanner scan)
-	{
+	public static void createGame(Scanner scan){
 		System.out.println("Welcome to cluedo!");
 		int h = 25;
 		int w = 25;
 		int numP = 0;
 		
 		//ask for how many players are playing
-		
+		System.out.println("How many players?");
 		numP = scan.nextInt();
 		
 		Board b = new Board(h, w, numP);
 		
-		ArrayList<Player> players = b.getPlayers();
+		int playerNum = 1;
 		
-		while(finished == false)
-		{
-			System.out.println("Looped-----------------------------");
-			players = haveTurns(players, scan, b);
-			System.out.println("There are " + players.size() + " players");
-		//for each player
-			
-		}
+		playGame(scan, b, playerNum);
 	}
 	
-	public static ArrayList<Player> haveTurns(ArrayList<Player> players, Scanner scan, Board b)
-	{
-		ArrayList<Player> play = players;
-		for(Player p: players)
-		{
-			System.out.println(p.getNum());
-			System.out.println(p.getLocation().getX());
+	/**
+	 * Loop through all the players while the game hasn't been won.
+	 * If a player gets eliminated, break the loop then remove 
+	 * the player and start the loop again from where it left off.
+	 * @param players
+	 * @param scan
+	 * @param b
+	 * @param playerNum - the player before the current
+	 */
+	public static void playGame(Scanner scan, Board b, int playerNum){
+		playerNum = (playerNum % b.getPlayers().size()) + 1;
+		Player currentPlayer = b.getPlayers().get(playerNum);
+		Player eliminatedPlayer = null;
+		System.out.println("Number of player:" + b.getPlayers().size());
+		while (finished == false) {
+			//System.out.println(p.getNum());
+			//System.out.println(p.getLocation().getX());
 			Room r = null;
 			//calculate distances	
-			p.calculateDistances(b);
+			currentPlayer.calculateDistances(b);
 			System.out.println("Calculated distances");
-			Map<Room, Integer> rDist = p.getRoomDist();
+			Map<Room, Integer> rDist = currentPlayer.getRoomDist();
 			int i = 0;
 			//look at room distances map and print out each entry
 			ArrayList<Room> rooms = new ArrayList<Room>();
 			System.out.println("rDist size = " + rDist.size());
-			for(Entry<Room, Integer> e: rDist.entrySet())
-			{
+			for(Entry<Room, Integer> e: rDist.entrySet()){
 				Room cr = e.getKey();
 				int dist = e.getValue();
 				rooms.add(cr);
@@ -58,7 +59,7 @@ public class Main {
 			}
 				
 			//roll dice
-			int diceNum = p.rollDice();
+			int diceNum = currentPlayer.rollDice();
 			System.out.println("You rolled a " + diceNum);
 			
 			//give option for movement (dont have to)
@@ -67,7 +68,7 @@ public class Main {
 			
 			//update location
 			r = rooms.get(numChoice);
-			p.updateLocation(r);
+			currentPlayer.updateLocation(r);
 			scan.useDelimiter(System.getProperty("line.separator"));
 			//make a guess option (suggestion, accusation OR nothing)
 			System.out.println("What would you like to do?");
@@ -75,54 +76,58 @@ public class Main {
 			System.out.println("2 - Accusation");
 			System.out.println("3 - Nothing");
 			int option = scan.nextInt();
-		    if(option == 1 || option == 2)
-		    { 
+		    if(option == 1 || option == 2) { 
 		    	
 		    	System.out.println("Please type the 3 cards that you are guessing on a new line");
 		    	System.out.println("In this order: Room, Weapon, Character");
 		    	//get cards from typed input on new line
 		    	String roomName = scan.next();
 		    	int index = b.getRoomNames().indexOf(roomName);
-		    	Room g = b.getRooms().get(index);
+		    	Room guessRoom = b.getRooms().get(index);
 		    	
 		    	int indexW = b.getWeaponNames().indexOf(scan.next());
-		    	Weapon gw = b.getWeapons().get(indexW);
+		    	Weapon guessWeapon = b.getWeapons().get(indexW);
 		    	
 		    	String characterN = scan.next();
 		    	int indexC = b.getCharacterNames().indexOf(characterN);
-		    	Character gc = b.getCharacters().get(indexC);
+		    	Character guessCharacter = b.getCharacters().get(indexC);
 		    	
 		    	ArrayList<Card> guessHand = new ArrayList<Card>();
-		    	guessHand.add(gw);
-		    	guessHand.add(g);
-		    	guessHand.add(gc);
+		    	guessHand.add(guessWeapon);
+		    	guessHand.add(guessRoom);
+		    	guessHand.add(guessCharacter);
 		    	
 		    	//create a guess hand
 		    	boolean opt = false;
-		    	if(option == 1)
-		    	{
+		    	if(option == 1){
 		    		opt = true;
 		    	}
 		    	
-				Guess n = new Guess(opt, guessHand, p);
-				play = b.getPlayers();
-				if(play.size() < players.size())
-				{
+				Guess guess = new Guess(opt, guessHand, currentPlayer);
+				
+				if(guess.getEliminatedPlayer()!=null){
+					eliminatedPlayer = guess.getEliminatedPlayer();
 					break;
 				}
-				
-				if (n.hasWon()) { finished = true;}
+				else if (guess.hasWon()) { 
+					finished = true;
+				}
 		    	
 		    }
-			//end turn 
+		    playerNum = (playerNum % b.getPlayers().size()) + 1;
+		    currentPlayer = b.getPlayers().get(playerNum);
 		}
-		return play;		
+		
+		playerNum = (playerNum % Board.players.size()) - 1;
+		b.players.remove(eliminatedPlayer);
+		while(b.getPlayers().size() > 1){
+			playGame(scan, b, playerNum);
+		}
 	}
 		
-	public static void main(String [ ] args)
-	{
+	public static void main(String [ ] args){
 		Scanner scan = new Scanner(System.in);
-		playGame(scan);
+		createGame(scan);
 	}
 
 }
