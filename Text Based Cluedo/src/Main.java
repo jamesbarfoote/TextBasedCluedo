@@ -72,8 +72,14 @@ public class Main {
 			    	String roomName = scan.next();
 			    	int index = b.getRoomNames().indexOf(roomName);
 			    	Room g = b.getRooms().get(index);
-			    	Weapon gw = new Weapon(scan.next());
-			    	Character gc = new Character(scan.next());
+			    	
+			    	int indexW = b.getWeaponNames().indexOf(scan.next());
+			    	Weapon gw = b.getWeapons().get(indexW);
+			    	
+			    	String characterN = scan.next();
+			    	int indexC = b.getCharacterNames().indexOf(characterN);
+			    	Character gc = b.getCharacters().get(indexC);
+			    	
 			    	ArrayList<Card> guessHand = new ArrayList<Card>();
 			    	guessHand.add(gw);
 			    	guessHand.add(g);

@@ -33,14 +33,13 @@ public class Guess {
 				room = (Room) card;
 			}
 		}
-		//System.out.println("player.getLocation() = " + player.getLocation());
-		System.out.println("room.getLocation() = " + room.getLocation());
 		
 		if (player.getLocation().equals(room.getLocation())) {
 			for (Card card : guess) {
-				int playerNum = player.getNum() + 1;
+				int playerNum = player.getNum();
 				int start = player.getNum();
 				while (playerNum != start) {
+					playerNum = (playerNum % players.size()) + 1;
 					ArrayList<Card> cards = players.get(playerNum).getCards();
 					for (Card c : cards) {
 						if (c.equals(card)) {
@@ -48,7 +47,7 @@ public class Guess {
 							break;
 						}
 					}
-					playerNum = (playerNum % players.size()) + 1;
+					
 					if (discoveredCard != null) {
 						break;
 					}
@@ -80,10 +79,12 @@ public class Guess {
 		for (Card card : guess) {
 			if(!Board.answer.contains(card)){
 				entered = true;
-				int playerNum = player.getNum() + 1;
+				int playerNum = player.getNum();
 				int start = player.getNum();
 				int i = 0;
 				while (playerNum != start) {	//For every player
+					playerNum = (playerNum % Board.players.size()) + 1;
+
 					if(player.getCards().isEmpty()){
 						break;
 					}
@@ -92,7 +93,6 @@ public class Guess {
 						player.getCards().remove(i);
 					}
 					i++;
-					playerNum = (playerNum % Board.players.size()) + 1;
 				}
 				Board.players.remove(player);
 			}

@@ -18,10 +18,9 @@ public class Player {
 	}
 
 	public int rollDice(){
-		Random rand = new Random();
-		roll = rand.nextInt(6);
-		System.out.println(roll);
-		return roll;
+		roll = ((int) Math.ceil(Math.random()*11)) + 1;
+		
+		return (roll);
 	}
 	
 	public void addToHand(Card c){
