@@ -7,16 +7,14 @@ public class Main {
 	private static boolean finished = false;
 	
 	public static void createGame(Scanner scan){
-		System.out.println("Welcome to cluedo!");
-		int h = 25;
-		int w = 25;
+		System.out.println("Welcome to Cluedo!");
 		int numP = 0;
 		
 		//ask for how many players are playing
 		System.out.println("How many players?");
 		numP = scan.nextInt();
 		
-		Board b = new Board(h, w, numP);
+		Board b = new Board(numP);
 		
 		int playerNum = 0;
 		
@@ -40,8 +38,6 @@ public class Main {
 			System.out.println("Current player is " + playerNum + " - " + currentPlayer.getName());
 			System.out.println("Number of player:" + b.getPlayers().size());
 			System.out.println("Size of hand is: " + currentPlayer.getCards().size());
-			//System.out.println(p.getNum());
-			//System.out.println(p.getLocation().getX());
 			Room r = null;
 			//calculate distances	
 			currentPlayer.calculateDistances(b);

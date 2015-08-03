@@ -26,11 +26,8 @@ public class Guess {
 		Room room = null;
 		Card discoveredCard = null;
 		ArrayList<Player> players = Board.players;
-		//System.out.println("Guess = " + guess.size());
 		for (Card card : guess) {
-			//System.out.println("Card = " + card.getName());
 			if (card instanceof Room) {
-				//System.out.println("Room = " + card.getName());
 				room = (Room) card;
 			}
 		}
@@ -84,7 +81,7 @@ public class Guess {
 				int playerNum = player.getNum();
 				playerNum = (playerNum % Board.players.size()) + 1;
 				int start = player.getNum();
-				while (true) {	//For every player
+				while (true) {
 					if(player.getCards().isEmpty()){
 						break;
 					}

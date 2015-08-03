@@ -16,7 +16,7 @@ public class Board {
 	private ArrayList<Room> rooms = new ArrayList<Room>();
 	private ArrayList<Card> allCards = new ArrayList<Card>();
 
-	public Board(int width, int height, int numP) {
+	public Board(int numP) {
 		createCards();
 		Board.answer = genAns();
 		for(Card c : Board.answer){
