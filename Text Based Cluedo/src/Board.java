@@ -19,6 +19,7 @@ public class Board {
 	public Board(int numP) {
 		createCards();
 		Board.answer = genAns();
+		System.out.println("Answers:");
 		for(Card c : Board.answer){
 			System.out.println(c.getName());
 		}

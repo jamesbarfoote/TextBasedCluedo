@@ -62,8 +62,9 @@ public class Main {
 				Room cr = e.getKey();
 				int dist = e.getValue();
 				rooms.add(cr);
-
-				System.out.println(i + " " + cr.getName() + ": \t  Distance = " + dist);
+				
+				System.out.printf("%2s. %15s - Distance = %-100s \n",  i, cr.getName(),dist);
+				//System.out.println(i + " " + cr.getName() + ": \t  Distance = " + dist);
 				i++;
 			}
 
