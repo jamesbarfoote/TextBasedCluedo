@@ -95,6 +95,7 @@ public class Guess {
 					}
 				}
 				eliminatedPlayer = player;
+				
 			}
 		}
 		if(entered == false && !guess.contains(null)){

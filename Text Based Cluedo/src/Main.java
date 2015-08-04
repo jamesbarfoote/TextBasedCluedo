@@ -10,11 +10,11 @@ public class Main {
 		System.out.println("Welcome to Cluedo!");
 
 		// ask for how many players are playing
-		System.out.println("How many players?");
+		System.out.println("How many players?  (2-6)");
 		String numP = scan.next();
 		int numPlayers = 0;
 		
-		numPlayers = isCorrectNumber(scan, 6, numP);
+		numPlayers = isCorrectNumber(scan, 2, 6, numP);
 		
 		Board b = new Board(numPlayers);
 
@@ -77,7 +77,7 @@ public class Main {
 			String numC = scan.next();
 			int numChoice = 0;
 			
-			numChoice = isCorrectNumber(scan, 9, numC);
+			numChoice = isCorrectNumber(scan, 1, 9, numC);
 
 			// update location
 			r = rooms.get(numChoice-1);
@@ -93,37 +93,34 @@ public class Main {
 				String stringOption = scan.next();
 				int option = 0;
 				
-				option = isCorrectNumber(scan, 2, stringOption);
+				option = isCorrectNumber(scan, 1, 2, stringOption);
 
 				if (option == 1) {
 
 					System.out.println("Please type the 3 cards that you are guessing on a new line");
 					System.out.println("In this order: Room, Weapon, Character");
 					// get cards from typed input on new line
-					String roomName = scan.next();
-					int index = b.getRoomNames().indexOf(roomName);
-					Room guessRoom = b.getRooms().get(index);
-
-					int indexW = b.getWeaponNames().indexOf(scan.next());
-					Weapon guessWeapon = b.getWeapons().get(indexW);
-
-					String characterN = scan.next();
-					int indexC = b.getCharacterNames().indexOf(characterN);
-					Character guessCharacter = b.getCharacters().get(indexC);
-
-					ArrayList<Card> guessHand = new ArrayList<Card>();
-					guessHand.add(guessRoom);
-					guessHand.add(guessWeapon);
-					guessHand.add(guessCharacter);
-
-					// create a guess hand
-					boolean opt = false;
+					
+					ArrayList<Card> guessHand = createGuess(scan, b);//Create the guess hand
+					while (guessHand == null) {
+						guessHand = createGuess(scan, b);
+					}
+					boolean opt = false;//Accusation
 
 					Guess guess = new Guess(opt, guessHand, currentPlayer);
 
 					if (guess.getEliminatedPlayer() != null) {
-						eliminatedPlayer = guess.getEliminatedPlayer();
-						break;
+						eliminatedPlayer = guess.getEliminatedPlayer(); //Set the player to be eliminated 
+						System.out.println("You guessed wrong");
+						System.out.println("You have been eliminated!");
+						
+						if(b.getPlayers().size() == 2)//If there is no one left in the game exit
+						{
+							System.out.println("");
+							System.out.println("Game over! No one guessed correctly");
+						}
+						
+						break;//Break out
 					} else if (guess.hasWon()) {
 						finished = true;
 						System.out.println("Congratulations " + currentPlayer.getName() + " you have won!");
@@ -140,7 +137,7 @@ public class Main {
 				String stringOption = scan.next();
 				int option = 0;
 				
-				option = isCorrectNumber(scan, 3, stringOption);
+				option = isCorrectNumber(scan, 1,  3, stringOption);
 				if (option == 1 || option == 2) {
 
 					System.out.println("Please type the 3 cards that you are guessing on a new line");
@@ -150,9 +147,6 @@ public class Main {
 					ArrayList<Card> guessHand = createGuess(scan, b);
 					while (guessHand == null) {
 						guessHand = createGuess(scan, b);
-					}
-					for (Card c : guessHand) {
-						System.out.println(c.getName());
 					}
 
 					// create a guess hand
@@ -165,6 +159,14 @@ public class Main {
 
 					if (guess.getEliminatedPlayer() != null) {
 						eliminatedPlayer = guess.getEliminatedPlayer();
+						System.out.println("You guessed wrong");
+						System.out.println("You have been eliminated!");
+						
+						if(b.getPlayers().size() == 2)//If there is no one left in the game exit
+						{
+							System.out.println("Game over! No one guessed correctly");
+						}
+						
 						break;
 					} else if (guess.hasWon()) {
 						finished = true;
@@ -234,16 +236,16 @@ public class Main {
 		   return true;
 		}
 	
-	private static int isCorrectNumber(Scanner scan, int maxNum, String numP){
+	private static int isCorrectNumber(Scanner scan, int minNum, int maxNum, String numP){
 		int numPlayers = 0;
 		while(true){
 			if(isInteger(numP)){
 				numPlayers = Integer.parseInt(numP); 
-				if((numPlayers > 0) && (numPlayers<=maxNum)){
+				if((numPlayers >= minNum) && (numPlayers<=maxNum)){
 					break;
 				}
 			}
-			System.out.println("Input must be between 1 and " + maxNum);
+			System.out.println("Input must be between " +  minNum + " and " + maxNum);
 			numP = scan.next();
 		}
 		return numPlayers;
