@@ -97,8 +97,7 @@ public class Main {
 
 				if (option == 1) {
 
-					System.out.println("Please type the 3 cards that you are guessing on a new line");
-					System.out.println("In this order: Room, Weapon, Character");
+					System.out.println("Please type the 3 cards that you are guessing, \neach one on a new line and in this order: Room, Weapon, Character");
 					// get cards from typed input on new line
 					
 					ArrayList<Card> guessHand = createGuess(scan, b);//Create the guess hand
@@ -140,8 +139,7 @@ public class Main {
 				option = isCorrectNumber(scan, 1,  3, stringOption);
 				if (option == 1 || option == 2) {
 
-					System.out.println("Please type the 3 cards that you are guessing on a new line");
-					System.out.println("In this order: Room, Weapon, Character");
+					System.out.println("Please type the 3 cards that you are guessing, \neach one on a new line and in this order: Room, Weapon, Character");
 					// get cards from typed input on new line
 
 					ArrayList<Card> guessHand = createGuess(scan, b);
