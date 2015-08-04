@@ -5,6 +5,7 @@ public class Guess {
 
 	private Player player;
 	private boolean won = false;
+	private boolean failed = false;
 	private Player eliminatedPlayer;
 
 	public Guess(boolean suggestion, List<Card> guess, Player player) {
@@ -38,10 +39,11 @@ public class Guess {
 				playerNum = (playerNum % Board.players.size()) + 1;
 				int start = player.getNum();
 				while (playerNum != start) {
-					ArrayList<Card> cards = players.get(playerNum-1).getCards();
+					ArrayList<Card> cards = players.get(playerNum-1).getDiscoveredCards();
 					for (Card c : cards) {
 						if (c.equals(card)) {
 							discoveredCard = c;
+							System.out.println(players.get(playerNum-1).getName());
 							break;
 						}
 					}
@@ -57,16 +59,18 @@ public class Guess {
 		}
 		else{
 			System.out.println("Must be in the room to suggest it");
+			this.failed= true;
+			return;
 		}
 		if (discoveredCard != null) {
 			for (Player p : players) {
-				p.addToHand(discoveredCard);
+				p.addToHand2(discoveredCard);
 			}
 		} else {
 			System.out.println("No player had any of the suggested cards");
 			return;
 		}
-		System.out.println("Discovered card was: " + discoveredCard.getName());
+		System.out.println("Discovered card was: " + discoveredCard.getName() + "this card has been added to everyones hand");
 	}
 
 	/**
@@ -83,12 +87,12 @@ public class Guess {
 				playerNum = (playerNum % Board.players.size()) + 1;
 				int start = player.getNum();
 				while (true) {
-					if(player.getCards().isEmpty()){
+					if(player.getHand().isEmpty()){
 						break;
 					}
 					if(Board.players.get(playerNum-1)!=player){
-						Board.players.get(playerNum-1).addToHand(player.getCards().get(0));
-						player.getCards().remove(0);
+						Board.players.get(playerNum-1).addToHand(player.getHand().get(0));
+						player.getHand().remove(0);
 					}
 					playerNum = (playerNum % Board.players.size()) + 1;
 					if(playerNum == start){
@@ -112,5 +116,9 @@ public class Guess {
 	
 	public Player getEliminatedPlayer(){
 		return eliminatedPlayer;
+	}
+	
+	public boolean getFailed(){
+		return failed;
 	}
 }

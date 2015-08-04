@@ -40,9 +40,13 @@ public class Main {
 		Player currentPlayer = b.getPlayers().get(playerNum - 1);
 		Player eliminatedPlayer = null;
 		while (finished == false) {	
-			System.out.println("------------------------------------------------");
+			System.out.println("--------------- Player " + playerNum + " ---------------------");
 			System.out.println("");
 			System.out.println("You are " + currentPlayer.getName());
+			System.out.println();
+			for(Card c : currentPlayer.getDiscoveredCards()){
+				System.out.println(c.getName());
+			}
 			// System.out.println("Number of player:" + b.getPlayers().size());
 			// System.out.println("Size of hand is: " +
 			// currentPlayer.getCards().size());
@@ -140,22 +144,26 @@ public class Main {
 				option = isCorrectNumber(scan, 1,  3, stringOption);
 				if (option == 1 || option == 2) {
 
-					System.out.println("Please type the 3 cards that you are guessing on a new line");
-					System.out.println("In this order: Room, Weapon, Character");
 					// get cards from typed input on new line
 
-					ArrayList<Card> guessHand = createGuess(scan, b);
-					while (guessHand == null) {
-						guessHand = createGuess(scan, b);
-					}
+					Guess guess = null;
+					do{
+						System.out.println("Please type the 3 cards that you are guessing on a new line");
+						System.out.println("In this order: Room, Weapon, Character");
+						
+						ArrayList<Card> guessHand = createGuess(scan, b);
+						while (guessHand == null) {
+							guessHand = createGuess(scan, b);
+						}
 
-					// create a guess hand
-					boolean opt = false;
-					if (option == 1) {
-						opt = true;
-					}
+						// create a guess hand
+						boolean opt = false;
+						if (option == 1) {
+							opt = true;
+						}
 
-					Guess guess = new Guess(opt, guessHand, currentPlayer);
+						guess = new Guess(opt, guessHand, currentPlayer);
+					}while(guess.getFailed() == true);
 
 					if (guess.getEliminatedPlayer() != null) {
 						eliminatedPlayer = guess.getEliminatedPlayer();

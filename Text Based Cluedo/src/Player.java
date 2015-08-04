@@ -3,6 +3,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Player {
+	private ArrayList<Card> discoveredCards = new ArrayList<Card>();
 	private ArrayList<Card> hand = new ArrayList<Card>();
 	private int roll;
 	private Map<Room, Integer> roomDistances = new HashMap<Room, Integer>();
@@ -23,7 +24,12 @@ public class Player {
 	}
 	
 	public void addToHand(Card c){
+		discoveredCards.add(c);
 		hand.add(c);
+	}
+	
+	public void addToHand2(Card c){
+		discoveredCards.add(c);
 	}
 
 	/**
@@ -78,7 +84,11 @@ public class Player {
 		return location;
 	}
 
-	public ArrayList<Card> getCards(){
+	public ArrayList<Card> getDiscoveredCards(){
+		return discoveredCards;
+	}
+	
+	public ArrayList<Card> getHand(){
 		return hand;
 	}
 
