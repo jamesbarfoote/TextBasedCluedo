@@ -64,7 +64,6 @@ public class Guess {
 			}
 		} else {
 			System.out.println("No player had any of the suggested cards");
-			return;
 		}
 		System.out.println("Discovered card was: " + discoveredCard.getName());
 	}
