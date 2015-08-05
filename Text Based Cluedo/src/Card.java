@@ -1,6 +1,11 @@
 
 public abstract class Card {
 	
+	/**
+	 * Checks if this card is equal to the another.
+	 * @param card - The card you're checking against
+	 * @return boolean
+	 */
 	public boolean equals(Card card){
 		if(card.getName().equals(this.getName())){
 			return true;
@@ -8,6 +13,10 @@ public abstract class Card {
 		return false;
 	}
 
+	/**
+	 * Returns the name of the card
+	 * @return String
+	 */
 	public String getName() {
 		if(this instanceof Room){
 			Room room = (Room) this;

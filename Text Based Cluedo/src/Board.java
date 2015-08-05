@@ -63,9 +63,12 @@ public class Board {
 				rooms.add(new Room(room, new Location(6,11)));
 			}
 		}
+		//Add to newly created cards to allCards, allCards temporarily holds all the cards not included in the answer
+		//to make it easier to delegate them out to the players
 		allCards.addAll(weapons);
 		allCards.addAll(characters);
 		allCards.addAll(rooms);
+		//Create the stairwells
 		String[] stairwellNames = {"Kitchen Stairwell", "Conservatory Stairwell", "Study Stairwell", "Lounge Stairwell"};
 		Location[] stairwellLocations = {new Location(0,0), new Location(24, 0), new Location(24, 24), new Location(0, 24)};
 		for(int i = 0; i < 4; i++){
@@ -98,8 +101,7 @@ public class Board {
 
 	/**
 	 * Creates the players and delegates cards to their hand
-	 * @param numPlayers
-	 * @return
+	 * @param numPlayers - The number of player in the game
 	 */
 	private void genPlayers(int numPlayers) {
 		Random rand = new Random();
@@ -127,6 +129,7 @@ public class Board {
 				players.add(new Player("Professor Plum", new Location(0,15), count+1));
 			}
 			count++;
+			//Make sure there are no duplicate player characters
 			while(true){
 				int newCharacterNum = rand.nextInt(characters.size());
 				if(usedCharacters.contains(newCharacterNum) == false || count == 6){

@@ -6,6 +6,10 @@ public class Character extends Card{
 		this.name = name;
 	}
 
+	/**
+	 * Returns the name of the character
+	 * @return String
+	 */
 	public String getName() {
 		return name;
 	}

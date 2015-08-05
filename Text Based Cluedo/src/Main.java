@@ -38,27 +38,22 @@ public class Main {
 	 */
 	public static void playGame(Scanner scan, Board b, int playerNum) {
 
-		playerNum = (playerNum % b.getPlayers().size()) + 1;
+		playerNum = (playerNum % b.getPlayers().size()) + 1; //go to the next player number
 		Player currentPlayer = b.getPlayers().get(playerNum - 1);
 		Player eliminatedPlayer = null;
-		while (finished == false) {	
+		while (finished == false) {	//While the game has not been won (or lost)
 			System.out.println("--------------- Player " + playerNum + " ---------------------");
-			System.out.println("");
+			System.out.println();
 			System.out.println("You are " + currentPlayer.getName());
 			System.out.println();
 			Room r = null;
-			// calculate distances
 			currentPlayer.calculateDistances(b);
-			// System.out.println("Calculated distances");
-
 			Map<Room, Integer> rDist = currentPlayer.getRoomDist();
 			int i = 1;
-			// look at room distances map and print out each entry
 			ArrayList<Room> rooms = new ArrayList<Room>();
-			// System.out.println("rDist size = " + rDist.size());
 			System.out.println("");
 			System.out.println("Type the number of the room you wish to move towards");
-			for (Entry<Room, Integer> e : rDist.entrySet()) {
+			for (Entry<Room, Integer> e : rDist.entrySet()) {	// look at room distances map and print out each entry
 				Room cr = e.getKey();
 				int dist = e.getValue();
 				rooms.add(cr);
@@ -67,13 +62,11 @@ public class Main {
 				i++;
 			}
 
-			// roll dice
-			int diceNum = currentPlayer.rollDice();
+			int diceNum = currentPlayer.rollDice();				// roll dice
 			System.out.println("");
 			System.out.println("You rolled " + diceNum);
 
-			// give option for movement (dont have to)
-			System.out.println("Where do you want to move to?");
+			System.out.println("Where do you want to move to?");		// give option for movement
 			String numC = scan.next();
 			int numChoice = 0;
 			
@@ -88,7 +81,7 @@ public class Main {
 			System.out.println("What would you like to do?");
 
 			int distToRoom = rDist.get(r);
-			if (distToRoom > diceNum) {
+			if (distToRoom > diceNum) {	//If the player did not roll high enough to make it to the room they wanted then don't give the option for a suggestion
 				System.out.println("1 - Accusation");
 				System.out.println("2 - Nothing");
 				String stringOption = scan.next();
@@ -96,7 +89,7 @@ public class Main {
 				
 				option = isCorrectNumber(scan, 1, 2, stringOption);
 
-				if (option == 1) {
+				if (option == 1) {	//If player chose to make an accusation
 
 					System.out.println("Please type the 3 cards that you are guessing on a new line");
 					System.out.println("In this order: Room, Weapon, Character");
@@ -115,7 +108,7 @@ public class Main {
 						System.out.println("You guessed wrong");
 						System.out.println("You have been eliminated!");
 						
-						if(b.getPlayers().size() == 2)//If there is no one left in the game exit
+						if(b.getPlayers().size() == 2)//If there is no one left in the game then exit
 						{
 							System.out.println("");
 							System.out.println("Game over! No one guessed correctly");
@@ -130,7 +123,7 @@ public class Main {
 
 				}
 
-			} else {
+			} else {	//If the player made it to the room they wanted
 
 				System.out.println("1 - Suggestion");
 				System.out.println("2 - Accusation");
@@ -139,12 +132,10 @@ public class Main {
 				int option = 0;
 				
 				option = isCorrectNumber(scan, 1,  3, stringOption);
-				if (option == 1 || option == 2) {
-
-					// get cards from typed input on new line
+				if (option == 1 || option == 2) {	//If they chose to make either an accusation of a suggestion
 
 					Guess guess = null;
-					do{
+					do{	//Ask them to type the cards they are suggesting or accusing while the input is invalid
 						System.out.println("Please type the 3 cards that you are guessing on a new line");
 						System.out.println("In this order: Room, Weapon, Character");
 						
@@ -181,13 +172,13 @@ public class Main {
 
 				}
 			}
-			playerNum = (playerNum % b.getPlayers().size()) + 1;
+			playerNum = (playerNum % b.getPlayers().size()) + 1;	//go to the next player
 			currentPlayer = b.getPlayers().get(playerNum - 1);
 		}
 
 		playerNum = (playerNum % b.players.size()) - 1;
 		b.players.remove(eliminatedPlayer);
-		while (b.getPlayers().size() > 1) {
+		while (b.getPlayers().size() > 1) {	//While there is more than 1 player left keep playing
 			playGame(scan, b, playerNum);
 		}
 	}
@@ -241,7 +232,7 @@ public class Main {
 	/**
 	 * Checks if the given string can be parsed to an integer.
 	 * @param s - The string to be parsed
-	 * @return
+	 * @return boolean of whether it is or not
 	 */
 	private static boolean isInteger(String s) {
 		  try { 
@@ -252,18 +243,26 @@ public class Main {
 		   // only got here if we didn't return false
 		   return true;
 		}
-	
-	private static int isCorrectNumber(Scanner scan, int minNum, int maxNum, String numP){
+	/**
+	 * Returns a number the user specifies given it's valid.
+	 * 
+	 * @param scan - The scanner used for accessing user input
+	 * @param minNum - The minimum possible value
+	 * @param maxNum - The maximum possible number
+	 * @param num - The number to be checked.
+	 * @return the integer the player gave
+	 */
+	private static int isCorrectNumber(Scanner scan, int minNum, int maxNum, String num){
 		int numPlayers = 0;
 		while(true){
-			if(isInteger(numP)){
-				numPlayers = Integer.parseInt(numP); 
+			if(isInteger(num)){
+				numPlayers = Integer.parseInt(num); 
 				if((numPlayers >= minNum) && (numPlayers<=maxNum)){
 					break;
 				}
 			}
 			System.out.println("Input must be between " +  minNum + " and " + maxNum);
-			numP = scan.next();
+			num = scan.next();
 		}
 		return numPlayers;
 	}

@@ -8,10 +8,18 @@ public class Room extends Card{
 		this.location = location;
 	}
 	
+	/**
+	 * Returns the location of the room.
+	 * @return Location
+	 */
 	public Location getLocation(){
 		return location;
 	}
 	
+	/**
+	 * Returns the name of the room
+	 * @return String
+	 */
 	public String getName(){
 		return name;
 	}

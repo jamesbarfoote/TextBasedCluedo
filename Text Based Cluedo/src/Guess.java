@@ -18,30 +18,31 @@ public class Guess {
 	}
 
 	/**
-	 * Check to see if player is in room suggested. Check to see if any of the
-	 * players have the card, if they do then add the discovered card to the
-	 * list of cards in every players hand if they don't already have it.
-	 * Otherwise do nothing.
+	 * Makes a suggestion based on the 3 cards given,
+	 * if suggestion is valid and not the answer then a
+	 * card is discovered for every player.
+	 * @param guess - The 3 cards to be suggested
+	 * @param b - The board to make a suggestion on.
 	 */
 	private void Suggestion(List<Card> guess, Board b) {
 		Room room = null;
 		Card discoveredCard = null;
 		ArrayList<Player> players = b.players;
 		for (Card card : guess) {
-			if (card instanceof Room) {
+			if (card instanceof Room) {	//Grab the room from the 3 suggested cards
 				room = (Room) card;
 			}
 		}
 		
-		if (player.getLocation().equals(room.getLocation())) {
+		if (player.getLocation().equals(room.getLocation())) {	//If player is in the suggested room
 			for (Card card : guess) {
 				int playerNum = player.getNum();
 				playerNum = (playerNum % b.players.size()) + 1;
 				int start = player.getNum();
-				while (playerNum != start) {
-					ArrayList<Card> cards = players.get(playerNum-1).getDiscoveredCards();
-					for (Card c : cards) {
-						if (c.equals(card)) {
+				while (playerNum != start) {	//iterate over all the other players
+					ArrayList<Card> cards = players.get(playerNum-1).getHand();
+					for (Card c : cards) {	//Check the hand of all the other players
+						if (c.equals(card)) { //If a player has one of the suggested cards in their hand
 							discoveredCard = c;
 							System.out.println(players.get(playerNum-1).getName());
 							break;
@@ -64,7 +65,7 @@ public class Guess {
 		}
 		if (discoveredCard != null) {
 			for (Player p : players) {
-				p.addToHand2(discoveredCard);
+				p.addToHand2(discoveredCard);	//Add the discovered card to the list of discovered cards in every player
 			}
 		} else {
 			System.out.println("No player had any of the suggested cards");
@@ -77,16 +78,18 @@ public class Guess {
 	 * Check to see if the Accusation is equal to the answer, if it is then the
 	 * player who made the accusation wins. Otherwise they are eliminated from
 	 * the game and their cards are delegated out to the remaining players.
+	 * @param guess - The 3 cards to be accused
+	 * @param b - The board to make an accusation on.
 	 */
 	private void Accusation(List<Card> guess, Board b) {
 		boolean entered = false;
 		for (Card card : guess) {
-			if(!b.answer.contains(card)){
+			if(!b.answer.contains(card)){	//If accusation is not correct
 				entered = true;
 				int playerNum = player.getNum();
 				playerNum = (playerNum % b.players.size()) + 1;
 				int start = player.getNum();
-				while (true) {
+				while (true) {	//Distribute the cards in the current players hand to all the remaining players.
 					if(player.getHand().isEmpty()){
 						break;
 					}

@@ -6,6 +6,10 @@ public class Weapon extends Card{
 		this.name = name;
 	}
 
+	/**
+	 * Returns the name of the weapon
+	 * @return String
+	 */
 	public String getName() {
 		return name;
 	}
