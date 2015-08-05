@@ -105,7 +105,6 @@ public class Guess {
 		}
 		if(entered == false && !guess.contains(null)){
 			this.won = true;
-			System.out.println(this.won);
 		}
 		
 	}

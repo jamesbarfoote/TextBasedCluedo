@@ -82,6 +82,8 @@ public class Main {
 			// update location
 			r = rooms.get(numChoice-1);
 			currentPlayer.updateLocation(r);
+			System.out.println(currentPlayer.getLocation().getX());
+			System.out.println(currentPlayer.getLocation().getY());
 			scan.useDelimiter(System.getProperty("line.separator"));
 			// make a guess option (suggestion, accusation OR nothing)
 			System.out.println("What would you like to do?");
@@ -194,9 +196,9 @@ public class Main {
 	/**
 	 * Creates a guess for the specified board. A guess consists of 3 cards used for
 	 * either a suggestion or an accusation
-	 * @param scan - the scanner used for accessing user input
+	 * @param scan - The scanner used for accessing user input
 	 * @param b - The current board
-	 * @return
+	 * @return The list of 3 cards to be used in the suggestion/accusation.
 	 */
 	private static ArrayList<Card> createGuess(Scanner scan, Board b) {
 		String roomName = scan.next();

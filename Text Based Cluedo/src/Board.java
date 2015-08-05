@@ -109,22 +109,22 @@ public class Board {
 		while(count < numPlayers){
 			usedCharacters.add(characterNum);
 			if(characterNames.get(characterNum) == "Miss Scarlett"){
-				players.add(new Player("Miss Scarlett", new Location(9,0), count));
+				players.add(new Player("Miss Scarlett", new Location(9,0), count+1));
 			}
 			if(characterNames.get(characterNum) == "Colonel Mustard"){
-				players.add(new Player("Colonel Mustard", new Location(17,0), count));
+				players.add(new Player("Colonel Mustard", new Location(17,0), count+1));
 			}
 			if(characterNames.get(characterNum) == "Mrs. White"){
-				players.add(new Player("Mrs. White", new Location(24,4), count));
+				players.add(new Player("Mrs. White", new Location(24,4), count+1));
 			}
 			if(characterNames.get(characterNum) == "The Reverend Green"){
-				players.add(new Player("The Reverend Green", new Location(15,24), count));
+				players.add(new Player("The Reverend Green", new Location(15,24), count+1));
 			}
 			if(characterNames.get(characterNum) == "Mrs. Peacock"){
-				players.add(new Player("Mrs. Peacock", new Location(6,24), count));
+				players.add(new Player("Mrs. Peacock", new Location(6,24), count+1));
 			}
 			if(characterNames.get(characterNum) == "Professor Plum"){
-				players.add(new Player("Professor Plum", new Location(0,15), count));
+				players.add(new Player("Professor Plum", new Location(0,15), count+1));
 			}
 			count++;
 			while(true){

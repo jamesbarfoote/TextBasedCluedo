@@ -118,8 +118,7 @@ public class Player {
 		return roomDistances;
 	}
 	
-	public int getNum()
-	{
+	public int getNum(){
 		return playerNum;
 	}
 	
