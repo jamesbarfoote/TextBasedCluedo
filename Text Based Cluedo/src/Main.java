@@ -82,10 +82,9 @@ public class Main {
 			// update location
 			r = rooms.get(numChoice-1);
 			currentPlayer.updateLocation(r);
-			System.out.println(currentPlayer.getLocation().getX());
-			System.out.println(currentPlayer.getLocation().getY());
 			scan.useDelimiter(System.getProperty("line.separator"));
 			// make a guess option (suggestion, accusation OR nothing)
+			System.out.println("");
 			System.out.println("What would you like to do?");
 
 			int distToRoom = rDist.get(r);

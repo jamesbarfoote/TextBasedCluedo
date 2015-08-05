@@ -36,7 +36,7 @@ public class Player {
 	 * Given a room the player wants to go to, calculates the new location.
 	 * @param r - Target Room.
 	 */
-	public void updateLocation(Room r) throws IllegalStateException{
+	public boolean updateLocation(Room r) throws IllegalStateException{
 		int stepsRemaining = roll;
 		int stepsTaken = 0;
 		int distance = roomDistances.get(r);
@@ -66,19 +66,34 @@ public class Player {
 				throw new IllegalStateException("Cannot move to desired location or already there");
 			}
 		}
-		Location[] stairwellLocations = {new Location(0,0), new Location(24, 0), new Location(24, 24), new Location(0, 24)};
+		Location[] stairwellLocations = {new Location(0,0), new Location(24, 0), new Location(24, 24), new Location(0, 24), 
+										 new Location(20, 19), new Location(6, 19), new Location(6, 4), new Location(20, 4)};
 		if(this.location.equals(stairwellLocations[0])){
-			this.location = stairwellLocations[2];
+			this.location = stairwellLocations[4];
+			System.out.println("You are now in the study");
+			return true;
 		}
 		else if(this.location.equals(stairwellLocations[1])){
-			this.location = stairwellLocations[3];
+			this.location = stairwellLocations[5];
+			System.out.println("You are now in the lounge");
+			return true;
 		}
 		else if(this.location.equals(stairwellLocations[2])){
-			this.location = stairwellLocations[0];
+			this.location = stairwellLocations[6];
+			System.out.println("You are now in the kitchen");
+			return true;
 		}
 		else if(this.location.equals(stairwellLocations[3])){
-			this.location = stairwellLocations[1];
+			this.location = stairwellLocations[7];
+			System.out.println("You are now in the conservatory");
+			return true;
 		}
+		
+		if(r.getLocation().equals(this.getLocation())){
+			System.out.println("You are in the " + r.getName());
+			return true;
+		}
+		return false;
 	}
 
 	/**
