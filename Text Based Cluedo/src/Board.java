@@ -5,7 +5,7 @@ import java.util.Random;
 
 public class Board {
 
-	public static ArrayList<Card> answer;
+	public ArrayList<Card> answer;
 	public ArrayList<Player> players = new ArrayList<Player>();
 	private ArrayList<String> weaponNames = new ArrayList<>(Arrays.asList("Candlestick", "Dagger", "Revolver", "Rope", "Lead Pipe", "Spanner"));
 	private ArrayList<String> characterNames = new ArrayList<>(Arrays.asList("Miss Scarlett", "Colonel Mustard","Mrs. White", "The Reverend Green", "Mrs. Peacock", "Professor Plum"));
@@ -19,7 +19,7 @@ public class Board {
 
 	public Board(int numP) {
 		createCards();
-		Board.answer = genAns();
+		this.answer = genAns();
 		genPlayers(numP);
 	}
 

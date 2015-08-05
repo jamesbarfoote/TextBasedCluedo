@@ -81,7 +81,7 @@ public class Guess {
 	private void Accusation(List<Card> guess, Board b) {
 		boolean entered = false;
 		for (Card card : guess) {
-			if(!Board.answer.contains(card)){
+			if(!b.answer.contains(card)){
 				entered = true;
 				int playerNum = player.getNum();
 				playerNum = (playerNum % b.players.size()) + 1;
