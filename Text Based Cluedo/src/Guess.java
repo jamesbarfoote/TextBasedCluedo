@@ -8,12 +8,12 @@ public class Guess {
 	private boolean failed = false;
 	private Player eliminatedPlayer;
 
-	public Guess(boolean suggestion, List<Card> guess, Player player) {
+	public Guess(boolean suggestion, List<Card> guess, Player player, Board b) {
 		this.player = player;
 		if (suggestion) {
-			Suggestion(guess);
+			Suggestion(guess, b);
 		} else {
-			Accusation(guess);
+			Accusation(guess, b);
 		}
 	}
 
@@ -23,10 +23,10 @@ public class Guess {
 	 * list of cards in every players hand if they don't already have it.
 	 * Otherwise do nothing.
 	 */
-	private void Suggestion(List<Card> guess) {
+	private void Suggestion(List<Card> guess, Board b) {
 		Room room = null;
 		Card discoveredCard = null;
-		ArrayList<Player> players = Board.players;
+		ArrayList<Player> players = b.players;
 		for (Card card : guess) {
 			if (card instanceof Room) {
 				room = (Room) card;
@@ -36,7 +36,7 @@ public class Guess {
 		if (player.getLocation().equals(room.getLocation())) {
 			for (Card card : guess) {
 				int playerNum = player.getNum();
-				playerNum = (playerNum % Board.players.size()) + 1;
+				playerNum = (playerNum % b.players.size()) + 1;
 				int start = player.getNum();
 				while (playerNum != start) {
 					ArrayList<Card> cards = players.get(playerNum-1).getDiscoveredCards();
@@ -47,7 +47,7 @@ public class Guess {
 							break;
 						}
 					}
-					playerNum = (playerNum % Board.players.size()) + 1;
+					playerNum = (playerNum % b.players.size()) + 1;
 					if (discoveredCard != null) {
 						break;
 					}
@@ -70,7 +70,7 @@ public class Guess {
 			System.out.println("No player had any of the suggested cards");
 			return;
 		}
-		System.out.println("Discovered card was: " + discoveredCard.getName() + "this card has been added to everyones hand");
+		System.out.println("Discovered card was: " + discoveredCard.getName() + " this card has been added to everyones hand");
 	}
 
 	/**
@@ -78,25 +78,25 @@ public class Guess {
 	 * player who made the accusation wins. Otherwise they are eliminated from
 	 * the game and their cards are delegated out to the remaining players.
 	 */
-	private void Accusation(List<Card> guess) {
+	private void Accusation(List<Card> guess, Board b) {
 		boolean entered = false;
 		for (Card card : guess) {
 			if(!Board.answer.contains(card)){
 				entered = true;
 				int playerNum = player.getNum();
-				playerNum = (playerNum % Board.players.size()) + 1;
+				playerNum = (playerNum % b.players.size()) + 1;
 				int start = player.getNum();
 				while (true) {
 					if(player.getHand().isEmpty()){
 						break;
 					}
-					if(Board.players.get(playerNum-1)!=player){
-						Board.players.get(playerNum-1).addToHand(player.getHand().get(0));
+					if(b.players.get(playerNum-1)!=player){
+						b.players.get(playerNum-1).addToHand(player.getHand().get(0));
 						player.getHand().remove(0);
 					}
-					playerNum = (playerNum % Board.players.size()) + 1;
+					playerNum = (playerNum % b.players.size()) + 1;
 					if(playerNum == start){
-						playerNum = (playerNum % Board.players.size()) + 1;
+						playerNum = (playerNum % b.players.size()) + 1;
 					}
 				}
 				eliminatedPlayer = player;

@@ -6,6 +6,10 @@ import java.util.Scanner;
 public class Main {
 	private static boolean finished = false;
 
+	/**
+	 * Creates the game and asks how many players there are
+	 * @param scan - the scanner used for accessing user input
+	 */
 	public static void createGame(Scanner scan) {
 		System.out.println("Welcome to Cluedo!");
 
@@ -28,11 +32,9 @@ public class Main {
 	 * gets eliminated, break the loop then remove the player and start the loop
 	 * again from where it left off.
 	 * 
-	 * @param players
-	 * @param scan
-	 * @param b
-	 * @param playerNum
-	 *            - the player before the current
+	 * @param scan - the scanner used for accessing user input
+	 * @param b - The current board
+	 * @param playerNum - the prior players number
 	 */
 	public static void playGame(Scanner scan, Board b, int playerNum) {
 
@@ -105,7 +107,7 @@ public class Main {
 					}
 					boolean opt = false;//Accusation
 
-					Guess guess = new Guess(opt, guessHand, currentPlayer);
+					Guess guess = new Guess(opt, guessHand, currentPlayer, b);
 
 					if (guess.getEliminatedPlayer() != null) {
 						eliminatedPlayer = guess.getEliminatedPlayer(); //Set the player to be eliminated 
@@ -156,7 +158,7 @@ public class Main {
 							opt = true;
 						}
 
-						guess = new Guess(opt, guessHand, currentPlayer);
+						guess = new Guess(opt, guessHand, currentPlayer, b);
 					}while(guess.getFailed() == true);
 
 					if (guess.getEliminatedPlayer() != null) {
@@ -182,13 +184,20 @@ public class Main {
 			currentPlayer = b.getPlayers().get(playerNum - 1);
 		}
 
-		playerNum = (playerNum % Board.players.size()) - 1;
-		Board.players.remove(eliminatedPlayer);
+		playerNum = (playerNum % b.players.size()) - 1;
+		b.players.remove(eliminatedPlayer);
 		while (b.getPlayers().size() > 1) {
 			playGame(scan, b, playerNum);
 		}
 	}
 
+	/**
+	 * Creates a guess for the specified board. A guess consists of 3 cards used for
+	 * either a suggestion or an accusation
+	 * @param scan - the scanner used for accessing user input
+	 * @param b - The current board
+	 * @return
+	 */
 	private static ArrayList<Card> createGuess(Scanner scan, Board b) {
 		String roomName = scan.next();
 		int index = b.getRoomNames().indexOf(roomName);
@@ -228,6 +237,11 @@ public class Main {
 
 	}
 	
+	/**
+	 * Checks if the given string can be parsed to an integer.
+	 * @param s - The string to be parsed
+	 * @return
+	 */
 	private static boolean isInteger(String s) {
 		  try { 
 		      Integer.parseInt(s); 
