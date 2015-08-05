@@ -14,14 +14,12 @@ public class Board {
 	private ArrayList<Weapon> weapons = new ArrayList<Weapon>();
 	private ArrayList<Character> characters = new ArrayList<Character>();
 	private ArrayList<Room> rooms = new ArrayList<Room>();
+	private ArrayList<Room> stairwells = new ArrayList<Room>();
 	private ArrayList<Card> allCards = new ArrayList<Card>();
 
 	public Board(int numP) {
 		createCards();
 		Board.answer = genAns();
-		for(Card c : Board.answer){
-			System.out.println(c.getName());
-		}
 		genPlayers(numP);
 	}
 
@@ -68,6 +66,11 @@ public class Board {
 		allCards.addAll(weapons);
 		allCards.addAll(characters);
 		allCards.addAll(rooms);
+		String[] stairwellNames = {"Kitchen Stairwell", "Conservatory Stairwell", "Study Stairwell", "Lounge Stairwell"};
+		Location[] stairwellLocations = {new Location(0,0), new Location(24, 0), new Location(24, 24), new Location(0, 24)};
+		for(int i = 0; i < 4; i++){
+			stairwells.add(new Room(stairwellNames[i], stairwellLocations[i]));
+		}
 	}
 
 	/**
@@ -106,22 +109,22 @@ public class Board {
 		while(count < numPlayers){
 			usedCharacters.add(characterNum);
 			if(characterNames.get(characterNum) == "Miss Scarlett"){
-				players.add(new Player("Miss Scarlett", new Location(10,0), count));
+				players.add(new Player("Miss Scarlett", new Location(9,0), count));
 			}
 			if(characterNames.get(characterNum) == "Colonel Mustard"){
-				players.add(new Player("Colonel Mustard", new Location(18,0), count));
+				players.add(new Player("Colonel Mustard", new Location(17,0), count));
 			}
 			if(characterNames.get(characterNum) == "Mrs. White"){
-				players.add(new Player("Mrs. White", new Location(25,5), count));
+				players.add(new Player("Mrs. White", new Location(24,4), count));
 			}
 			if(characterNames.get(characterNum) == "The Reverend Green"){
-				players.add(new Player("The Reverend Green", new Location(16,25), count));
+				players.add(new Player("The Reverend Green", new Location(15,24), count));
 			}
 			if(characterNames.get(characterNum) == "Mrs. Peacock"){
-				players.add(new Player("Mrs. Peacock", new Location(7,25), count));
+				players.add(new Player("Mrs. Peacock", new Location(6,24), count));
 			}
 			if(characterNames.get(characterNum) == "Professor Plum"){
-				players.add(new Player("Professor Plum", new Location(0,16), count));
+				players.add(new Player("Professor Plum", new Location(0,15), count));
 			}
 			count++;
 			while(true){
@@ -184,5 +187,9 @@ public class Board {
 	
 	public ArrayList<Character> getCharacters(){
 		return characters;
+	}
+	
+	public ArrayList<Room> getStairwells(){
+		return stairwells;
 	}
 }

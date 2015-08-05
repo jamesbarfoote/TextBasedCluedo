@@ -44,12 +44,6 @@ public class Main {
 			System.out.println("");
 			System.out.println("You are " + currentPlayer.getName());
 			System.out.println();
-			for(Card c : currentPlayer.getDiscoveredCards()){
-				System.out.println(c.getName());
-			}
-			// System.out.println("Number of player:" + b.getPlayers().size());
-			// System.out.println("Size of hand is: " +
-			// currentPlayer.getCards().size());
 			Room r = null;
 			// calculate distances
 			currentPlayer.calculateDistances(b);
@@ -67,7 +61,7 @@ public class Main {
 				int dist = e.getValue();
 				rooms.add(cr);
 
-				System.out.printf("%2s. %15s - Distance = %-100s \n",  i, cr.getName(),dist);
+				System.out.printf("%2s. %22s - Distance = %-100s \n",  i, cr.getName(),dist);
 				i++;
 			}
 
@@ -81,7 +75,7 @@ public class Main {
 			String numC = scan.next();
 			int numChoice = 0;
 			
-			numChoice = isCorrectNumber(scan, 1, 9, numC);
+			numChoice = isCorrectNumber(scan, 1, 13, numC);
 
 			// update location
 			r = rooms.get(numChoice-1);

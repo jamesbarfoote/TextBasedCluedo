@@ -66,6 +66,19 @@ public class Player {
 				throw new IllegalStateException("Cannot move to desired location or already there");
 			}
 		}
+		Location[] stairwellLocations = {new Location(0,0), new Location(24, 0), new Location(24, 24), new Location(0, 24)};
+		if(this.location.equals(stairwellLocations[0])){
+			this.location = stairwellLocations[2];
+		}
+		else if(this.location.equals(stairwellLocations[1])){
+			this.location = stairwellLocations[3];
+		}
+		else if(this.location.equals(stairwellLocations[2])){
+			this.location = stairwellLocations[0];
+		}
+		else if(this.location.equals(stairwellLocations[3])){
+			this.location = stairwellLocations[1];
+		}
 	}
 
 	/**
@@ -76,6 +89,11 @@ public class Player {
 		for(Room r : b.getRooms()){
 			Location roomLocation = r.getLocation();
 			int distance = Math.abs(roomLocation.getX() - location.getX()) + Math.abs(roomLocation.getY() - location.getY());
+			roomDistances.put(r, distance);
+		}
+		for(Room r : b.getStairwells()){
+			Location stairLocation = r.getLocation();
+			int distance = Math.abs(stairLocation.getX() - location.getX()) + Math.abs(stairLocation.getY() - location.getY());
 			roomDistances.put(r, distance);
 		}
 	}
